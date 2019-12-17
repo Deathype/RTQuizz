@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTQuizz", "RTQuizz.csproj", "{5701C6B7-A271-4747-B04F-BB0638567CEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5701C6B7-A271-4747-B04F-BB0638567CEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5701C6B7-A271-4747-B04F-BB0638567CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5701C6B7-A271-4747-B04F-BB0638567CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5701C6B7-A271-4747-B04F-BB0638567CEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7CC568E0-0FE2-4306-905E-7D5682836DB7}
+	EndGlobalSection
+EndGlobal
