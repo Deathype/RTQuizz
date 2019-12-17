@@ -9,6 +9,11 @@ namespace DataAccessLayer
         public Stagiaire stagiaire { get; set; }
         public Question question { get; set; }
         public Reponses reponses { get; set; }
-        public String repStagiaire { get; set; }
+        public Stagiaire repStagiaire { get; set; }
+
+   
+
+
+
     }
 }
