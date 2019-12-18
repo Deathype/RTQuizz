@@ -1,8 +1,31 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var message = @ViewBag.message;
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">RTQuizz</h1>
+    <p>Créez ou rejoignez un Quizz</p>
 </div>
+
+<br/><hr/><br/>
+
+<div class="text-center">
+    <form method="POST" action="@Url.Action("RunQuizz", "Home")">
+        Prenom :
+        <br />
+        <input type="text" id="prenomUser" name="prenomUser" required>
+        <br />
+        Nom :
+        <br />
+        <input type="text" id="nomUser" name="nomUser" required>
+        <br/>
+        Code Quizz :
+        <br />
+        <input type="text" id="nomQuizz" name="nomQuizz" required>
+        <br /><br />
+        <input type="submit" name="Connexion" value="Connexion" />
+    </form>
+</div>
+
+@if (message != "") { <div class="text-center" style="color:red;font-weight:bold;margin:10px;font-size:18px;font-family:cursive;">@message</div> }

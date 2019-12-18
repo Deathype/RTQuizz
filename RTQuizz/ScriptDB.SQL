@@ -22,6 +22,22 @@ GO
 USE QuizDB;
 GO
 
+/*------------------------------------------------------------
+*        Script SQLSERVER 
+------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------
+-- Table: Classe
+------------------------------------------------------------*/
+/*------------------------------------------------------------
+*        Script SQLSERVER 
+------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------
+-- Table: Classe
+------------------------------------------------------------*/
 CREATE TABLE Classe(
 	IdClass       INT IDENTITY (1,1) NOT NULL ,
 	NomClasse     VARCHAR (40) NOT NULL ,
@@ -34,10 +50,10 @@ CREATE TABLE Classe(
 -- Table: Stagiaire
 ------------------------------------------------------------*/
 CREATE TABLE Stagiaire(
-	IdStagiare     INT IDENTITY (1,1) NOT NULL ,
+	IdStagiaire    INT IDENTITY (1,1) NOT NULL ,
 	NomStagiaire   VARCHAR (40) NOT NULL ,
 	IdClass        INT  NOT NULL  ,
-	CONSTRAINT Stagiaire_PK PRIMARY KEY (IdStagiare)
+	CONSTRAINT Stagiaire_PK PRIMARY KEY (IdStagiaire)
 
 	,CONSTRAINT Stagiaire_Classe_FK FOREIGN KEY (IdClass) REFERENCES Classe(IdClass)
 );
@@ -111,16 +127,32 @@ CREATE TABLE composer(
 -- Table: Repondre
 ------------------------------------------------------------*/
 CREATE TABLE Repondre(
-	IdStagiare     INT  NOT NULL ,
+	IdStagiaire    INT  NOT NULL ,
 	IdQuestion     INT  NOT NULL ,
 	IdReponse      INT  NOT NULL ,
 	RepStagiaire   VARCHAR (40) NOT NULL  ,
-	CONSTRAINT Repondre_PK PRIMARY KEY (IdStagiare,IdQuestion,IdReponse)
+	CONSTRAINT Repondre_PK PRIMARY KEY (IdStagiaire,IdQuestion,IdReponse)
 
-	,CONSTRAINT Repondre_Stagiaire_FK FOREIGN KEY (IdStagiare) REFERENCES Stagiaire(IdStagiare)
+	,CONSTRAINT Repondre_Stagiaire_FK FOREIGN KEY (IdStagiaire) REFERENCES Stagiaire(IdStagiaire)
 	,CONSTRAINT Repondre_Question0_FK FOREIGN KEY (IdQuestion) REFERENCES Question(IdQuestion)
 	,CONSTRAINT Repondre_Reponses1_FK FOREIGN KEY (IdReponse) REFERENCES Reponses(IdReponse)
 );
+
+
+/*------------------------------------------------------------
+-- Table: Participe
+------------------------------------------------------------*/
+CREATE TABLE Participe(
+	IdQuizz       INT  NOT NULL ,
+	IdStagiaire   INT  NOT NULL  ,
+	CONSTRAINT Participe_PK PRIMARY KEY (IdQuizz,IdStagiaire)
+
+	,CONSTRAINT Participe_Quizz_FK FOREIGN KEY (IdQuizz) REFERENCES Quizz(IdQuizz)
+	,CONSTRAINT Participe_Stagiaire0_FK FOREIGN KEY (IdStagiaire) REFERENCES Stagiaire(IdStagiaire)
+);
+
+
+
 
 
 GO

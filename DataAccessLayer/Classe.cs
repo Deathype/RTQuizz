@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace DataAccessLayer
 {
-    class Classe
+    public class Classe
     {
-        public int IdClasse { get; set; }
-        public String nomClasse { get; set; }
+        [Key]
+        public int IdClass { get; set; }
+        public String NomClasse { get; set; }
 
-        public int nombre_Eleve { get; set; }
+        public int NombreEleve { get; set; }
     }
 }

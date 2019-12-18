@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DataAccessLayer
 {
-    class Stagiaire
+    public class Stagiaire
     {
-        public int IdStagiaire { get; set; }
-        public String Nom { get; set; }
 
-        public String Prenom { get; set; }
+        [Key]
+        public int IdStagiaire { get; set; }
+        public String NomStagiaire { get; set; }
+
+        [ForeignKey("IdClass")]
+        public Classe Classe { get; set; }
+
+        
+        public int IdClass { get; set; }
     }
 }
