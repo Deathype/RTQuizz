@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DataAccessLayer
@@ -9,10 +10,10 @@ namespace DataAccessLayer
     {
         [Key]
         public int idQuizz { get; set; }
-        public String nomQuizz { get; set; }
-        public String themeQuizz { get; set; }
-     
+        public String NomQuizz { get; set; }
+        public String ThemeQuizz { get; set; }
+     [ForeignKey("IdFormateur")]
         public Formateur formateur { get; set; }
-        public List<Question> listQuestions { get; set; }
+    
     }
 }

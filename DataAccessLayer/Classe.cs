@@ -8,9 +8,9 @@ namespace DataAccessLayer
     public class Classe
     {
         [Key]
-        public int IdClasse { get; set; }
-        public String nomClasse { get; set; }
+        public int IdClass { get; set; }
+        public String NomClasse { get; set; }
 
-        public int nombreEleve { get; set; }
+        public int NombreEleve { get; set; }
     }
 }

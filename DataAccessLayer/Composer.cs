@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace DataAccessLayer
 {
-     public  class Question
+     /*public  class Composer
     {
-        [Key]
+        [Key, Column(Order = 0)]
         public int IdQuestion { get; set; }
-        public String Theme { get; set; }
-        public String NomQuestion { get; set; }
+        [Key, Column(Order = 1)]
+        public int IdQuizz { get; set; }
 
     }
+    */
 }

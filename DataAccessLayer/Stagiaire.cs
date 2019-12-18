@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DataAccessLayer
@@ -9,11 +10,13 @@ namespace DataAccessLayer
     {
 
         [Key]
-        public int idStagiaire { get; set; }
-        public String nom { get; set; }
+        public int IdStagiaire { get; set; }
+        public String NomStagiaire { get; set; }
 
-        public String prenom { get; set; }
+        [ForeignKey("IdClass")]
+        public Classe Classe { get; set; }
 
-        public Classe idClasse { get; set; }
+        
+        public int IdClass { get; set; }
     }
 }

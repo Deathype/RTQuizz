@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DataAccessLayer
@@ -8,9 +9,14 @@ namespace DataAccessLayer
     public class Reponses
     {
         [Key]
-        public int id { get; set; }
-        public String nom { get; set; }
-        public Boolean bonneReponse { get; set; }
+        public int IdReponse { get; set; }
+        public String NomReponse { get; set; }
+        public Boolean BonneReponse { get; set; }
+
+        [ForeignKey("IdQuestion")]
         public Question question { get; set; }
+
+        
+        public int IdQuestion { get; set; }
     }
 }
