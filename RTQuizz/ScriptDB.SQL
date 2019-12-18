@@ -22,9 +22,25 @@ GO
 USE QuizDB;
 GO
 
+/*------------------------------------------------------------
+*        Script SQLSERVER 
+------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------
+-- Table: Classe
+------------------------------------------------------------*/
+/*------------------------------------------------------------
+*        Script SQLSERVER 
+------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------
+-- Table: Classe
+------------------------------------------------------------*/
 CREATE TABLE Classe(
 	IdClass       INT IDENTITY (1,1) NOT NULL ,
-	NomClasse     VARCHAR (400) NOT NULL ,
+	NomClasse     VARCHAR (40) NOT NULL ,
 	NombreEleve   INT  NOT NULL  ,
 	CONSTRAINT Classe_PK PRIMARY KEY (IdClass)
 );
@@ -35,7 +51,7 @@ CREATE TABLE Classe(
 ------------------------------------------------------------*/
 CREATE TABLE Stagiaire(
 	IdStagiare     INT IDENTITY (1,1) NOT NULL ,
-	NomStagiaire   VARCHAR (400) NOT NULL ,
+	NomStagiaire   VARCHAR (40) NOT NULL ,
 	IdClass        INT  NOT NULL  ,
 	CONSTRAINT Stagiaire_PK PRIMARY KEY (IdStagiare)
 
@@ -48,9 +64,9 @@ CREATE TABLE Stagiaire(
 ------------------------------------------------------------*/
 CREATE TABLE Formateur(
 	idFormateur   INT IDENTITY (1,1) NOT NULL ,
-	Nom           VARCHAR (500) NOT NULL ,
-	Prenom        VARCHAR (100) NOT NULL ,
-	ProfMatiere   VARCHAR (100) NOT NULL  ,
+	Nom           VARCHAR (50) NOT NULL ,
+	Prenom        VARCHAR (10) NOT NULL ,
+	ProfMatiere   VARCHAR (10) NOT NULL  ,
 	CONSTRAINT Formateur_PK PRIMARY KEY (idFormateur)
 );
 
@@ -60,8 +76,8 @@ CREATE TABLE Formateur(
 ------------------------------------------------------------*/
 CREATE TABLE Quizz(
 	IdQuizz       INT IDENTITY (1,1) NOT NULL ,
-	NomQuizz      VARCHAR (400) NOT NULL ,
-	ThemeQuizz    VARCHAR (400) NOT NULL ,
+	NomQuizz      VARCHAR (40) NOT NULL ,
+	ThemeQuizz    VARCHAR (40) NOT NULL ,
 	idFormateur   INT  NOT NULL  ,
 	CONSTRAINT Quizz_PK PRIMARY KEY (IdQuizz)
 
@@ -74,8 +90,8 @@ CREATE TABLE Quizz(
 ------------------------------------------------------------*/
 CREATE TABLE Question(
 	IdQuestion    INT IDENTITY (1,1) NOT NULL ,
-	Theme         VARCHAR (100) NOT NULL ,
-	NomQuestion   VARCHAR (500) NOT NULL  ,
+	Theme         VARCHAR (10) NOT NULL ,
+	NomQuestion   VARCHAR (40) NOT NULL  ,
 	CONSTRAINT Question_PK PRIMARY KEY (IdQuestion)
 );
 
@@ -85,7 +101,7 @@ CREATE TABLE Question(
 ------------------------------------------------------------*/
 CREATE TABLE Reponses(
 	IdReponse      INT IDENTITY (1,1) NOT NULL ,
-	NomReponse     VARCHAR (400) NOT NULL ,
+	NomReponse     VARCHAR (40) NOT NULL ,
 	BonneReponse   bit  NOT NULL ,
 	IdQuestion     INT  NOT NULL  ,
 	CONSTRAINT Reponses_PK PRIMARY KEY (IdReponse)
@@ -121,6 +137,20 @@ CREATE TABLE Repondre(
 	,CONSTRAINT Repondre_Question0_FK FOREIGN KEY (IdQuestion) REFERENCES Question(IdQuestion)
 	,CONSTRAINT Repondre_Reponses1_FK FOREIGN KEY (IdReponse) REFERENCES Reponses(IdReponse)
 );
+
+
+/*------------------------------------------------------------
+-- Table: Participe
+------------------------------------------------------------*/
+CREATE TABLE Participe(
+	IdQuizz      INT  NOT NULL ,
+	IdStagiare   INT  NOT NULL  ,
+	CONSTRAINT Participe_PK PRIMARY KEY (IdQuizz,IdStagiare)
+
+	,CONSTRAINT Participe_Quizz_FK FOREIGN KEY (IdQuizz) REFERENCES Quizz(IdQuizz)
+	,CONSTRAINT Participe_Stagiaire0_FK FOREIGN KEY (IdStagiare) REFERENCES Stagiaire(IdStagiare)
+);
+
 
 
 GO
