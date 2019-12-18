@@ -77,6 +77,13 @@ INSERT INTO Repondre(IdStagiare,IdQuestion,IdReponse,RepStagiaire)
 VALUES
 (3,2,1,'B');
 
+   INSERT INTO Participe(IdQuizz,IdStagiare)
+ VALUES
+ (1, 1),
+ (1, 2),
+ (2,2);
+
+
 SELECT * FROM Repondre
 SELECT * FROM Stagiaire
 SELECT * FROM Question
@@ -84,6 +91,9 @@ SELECT * FROM Reponses
 SELECT * FROM Repondre
 SELECT * FROM Reponses
 SELECT * FROM Quizz
+
+
+ SELECT * FROM Participe;
 
 
 
