@@ -1,0 +1,24 @@
+﻿@*@model Quizz*@
+@{
+    ViewData["Title"] = "Quizz Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Question</h1>
+</div>
+
+<br />
+<hr />
+<br />
+
+<div class="text-lg-center">
+    <form method="POST" action="@Url.Action("ValidReponse", "Quizz")">
+        <div>
+            <input type="radio" id="rep1"
+                   name="rep1" value="rep1">
+            <label for="rep1">rep1</label>
+        </div>
+            <input type="submit" name="Creer" value="Creer" />
+
+</form>
+</div>

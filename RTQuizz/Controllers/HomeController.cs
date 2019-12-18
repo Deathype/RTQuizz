@@ -23,6 +23,22 @@ namespace RTQuizz.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult MyAction(String nomUser, String nomQuizz)
+        {
+
+            if (Request.Form.Keys.Contains("Rejoindre"))
+            {
+
+            }
+            else
+            {
+
+            }
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
