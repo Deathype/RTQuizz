@@ -51,7 +51,7 @@ INSERT INTO Classe (nomClasse, NombreEleve)
 
 --  SELECT * FROM Reponses
 
---INSERT INTO Repondre(IdStagiare,IdQuestion,IdReponse,RepStagiaire)
+--INSERT INTO Repondre(IdStagiaire,IdQuestion,IdReponse,RepStagiaire)
 -- VALUES
 -- (1,2,1,'A'),
 -- (2,3,1,'B'),
@@ -73,11 +73,11 @@ VALUES
 
 
 
-INSERT INTO Repondre(IdStagiare,IdQuestion,IdReponse,RepStagiaire)
+INSERT INTO Repondre(IdStagiaire,IdQuestion,IdReponse,RepStagiaire)
 VALUES
 (3,2,1,'B');
 
-   INSERT INTO Participe(IdQuizz,IdStagiare)
+   INSERT INTO Participe(IdQuizz,IdStagiaire)
  VALUES
  (1, 1),
  (1, 2),
