@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var message = @ViewBag.message;
 }
 
 <div class="text-center">
@@ -9,18 +10,22 @@
 
 <br/><hr/><br/>
 
-<div class="text-lg-center">
-    <form method="POST" action="@Url.Action("MyAction", "Home")">
+<div class="text-center">
+    <form method="POST" action="@Url.Action("RunQuizz", "Home")">
+        Prenom :
+        <br />
+        <input type="text" id="prenomUser" name="prenomUser" required>
+        <br />
         Nom :
-        <br/>
+        <br />
         <input type="text" id="nomUser" name="nomUser" required>
         <br/>
         Code Quizz :
-        <br/>
+        <br />
         <input type="text" id="nomQuizz" name="nomQuizz" required>
-        <br/><br/>
-        <input type="submit" name="Rejoindre" value="Rejoindre" />
-        <input type="submit" name="Creer" value="Creer" />
-
+        <br /><br />
+        <input type="submit" name="Connexion" value="Connexion" />
     </form>
 </div>
+
+@if (message != "") { <div class="text-center" style="color:red;font-weight:bold;margin:10px;font-size:18px;font-family:cursive;">@message</div> }

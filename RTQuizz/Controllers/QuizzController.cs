@@ -13,6 +13,11 @@ namespace RTQuizz.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult ValidReponse()
+        {
 
+            return View();
+        }
     }
 }
