@@ -7,7 +7,13 @@ namespace RTQuizz.Hubs
 {
     public class QuizzHub : Hub
     {
+        private static QuizzHub _Instance;
+        public static QuizzHub Instance { get { return _Instance; } }
+        public QuizzHub()
+        {
+            _Instance = this;
 
+        }
         private ConnectionListe ListeDesConnections = new ConnectionListe();
         #region "Fonction perso"
         // connection

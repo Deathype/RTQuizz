@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 using DataAccessLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RTQuizz.Hubs;
 using RTQuizz.Models;
 
 namespace RTQuizz.Controllers
 {
     public class HomeController : Controller
     {
-        private DbRtQuizz _dbQuizz;
+        private DbRTContext _dbQuizz;
 
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, DbRtQuizz dbQuizz)
+        public HomeController(ILogger<HomeController> logger, DbRTContext dbQuizz)
         {
             _logger = logger;
             this._dbQuizz = dbQuizz;
@@ -29,7 +30,7 @@ namespace RTQuizz.Controllers
         }
 
         [HttpPost]
-        public ActionResult RunQuizz(String prenomUser, String nomUser, String nomQuizz)
+        public async Task<ActionResult> RunQuizz(String nomUser, String nomQuizz)
         {
             String message = "";
             String view;
@@ -38,14 +39,19 @@ namespace RTQuizz.Controllers
             forma.idFormateur = 1;
             ViewBag.Formateur = forma;
 
-            if (_dbQuizz.Quizz.Any(q => q.nomQuizz == nomQuizz))
+            if (_dbQuizz.Quizz.Any(q => q.NomQuizz == nomQuizz))
             {
 
                 Quizz quizz = _dbQuizz.Quizz.Find(nomQuizz);
-                ViewBag.Quizz = quizz;
+                
 
-                if (_dbQuizz.Stagiaires.Any(s => s.nom == nomUser) && _dbQuizz.Stagiaires.Any(s => s.prenom == prenomUser))
+                if (_dbQuizz.Stagiaire.Any(s => s.NomStagiaire == nomUser))
                 {
+                    Stagiaire stagiaire = _dbQuizz.Stagiaire.Find(nomUser);
+                    
+                    ViewBag.Stagiaire = stagiaire;
+                    ViewBag.Quizz = quizz;
+                    //await QuizzHub.Instance.ConnecterUserQuizz(nomUser, "ril18", nomQuizz);
                     // Ajout du stagiaire au quizz
                     view = "~/Views/Quizz/AfficheQuestion.cshtml";
                 }
