@@ -45,11 +45,9 @@ namespace RTQuizz.Controllers
                 Quizz quizz = _dbQuizz.Quizz.Find(nomQuizz);
                 
 
-<<<<<<< HEAD
-                if (_dbQuizz.Stagiaire.Any(s => s.IdStagiaire == nomUser) && _dbQuizz.Stagiaire.Any(s => s.prenom == prenomUser))
-=======
+
                 if (_dbQuizz.Stagiaire.Any(s => s.NomStagiaire == nomUser))
->>>>>>> b018eb3c6de272fdbc6f5ccf66991ea8323cb629
+
                 {
                     Stagiaire stagiaire = _dbQuizz.Stagiaire.Find(nomUser);
                     
