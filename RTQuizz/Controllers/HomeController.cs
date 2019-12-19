@@ -12,12 +12,12 @@ namespace RTQuizz.Controllers
 {
     public class HomeController : Controller
     {
-        private DbRtQuizz _dbQuizz;
+        private DbRTContext _dbQuizz;
 
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, DbRtQuizz dbQuizz)
+        public HomeController(ILogger<HomeController> logger, DbRTContext dbQuizz)
         {
             _logger = logger;
             this._dbQuizz = dbQuizz;
@@ -38,13 +38,13 @@ namespace RTQuizz.Controllers
             forma.idFormateur = 1;
             ViewBag.Formateur = forma;
 
-            if (_dbQuizz.Quizz.Any(q => q.nomQuizz == nomQuizz))
+            if (_dbQuizz.Quizz.Any(q => q.NomQuizz == nomQuizz))
             {
 
                 Quizz quizz = _dbQuizz.Quizz.Find(nomQuizz);
                 ViewBag.Quizz = quizz;
 
-                if (_dbQuizz.Stagiaires.Any(s => s.nom == nomUser) && _dbQuizz.Stagiaires.Any(s => s.prenom == prenomUser))
+                if (_dbQuizz.Stagiaire.Any(s => s.IdStagiaire == nomUser) && _dbQuizz.Stagiaire.Any(s => s.prenom == prenomUser))
                 {
                     // Ajout du stagiaire au quizz
                     view = "~/Views/Quizz/AfficheQuestion.cshtml";
