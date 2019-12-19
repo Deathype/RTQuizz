@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DataAccessLayer;
 
 namespace RTQuizz.Hubs
 {
@@ -9,82 +10,59 @@ namespace RTQuizz.Hubs
     {
         private static QuizzHub _Instance;
         public static QuizzHub Instance { get { return _Instance; } }
+
+        public List<ReponseClasse> ListeRepDetails = new List<ReponseClasse>();
+        
         public QuizzHub()
         {
             _Instance = this;
-
         }
-        private ConnectionListe ListeDesConnections = new ConnectionListe();
+       
         #region "Fonction perso"
         // connection
-        public async Task ConnecterUserQuizz(string user,string classe,string quizz)
+      public void ClearListReponse()
         {
-            //cherche ou crée l'utilisateur (camille,clement)
-
-            // ajoute au groupe du quizz        
-            ConnectionInfo UserTemp = new ConnectionInfo();
-            UserTemp.ConnectionId = Context.ConnectionId;
-            UserTemp.User = user;
-            UserTemp.classe = classe;
-            UserTemp.Quizz = quizz;
-            UserTemp.QuestionNumero = 1;
-
-            if (ListeDesConnections.User(UserTemp) == true)
-            {
-                await Groups.AddToGroupAsync(Context.ConnectionId, quizz);
-                
-            }   
-        }
-        public Task SendQuestionDemande(string user)
+            ListeRepDetails.Clear();
+         } 
+         public Task EnvoieresultatQuestionClasse(Repondre Rep )
         {
-            ConnectionInfo UserTemp = ListeDesConnections.ChercheUserParNom(user);
-          if (UserTemp != null)
-            {
-                 UserTemp.QuestionNumero++;
-                //clement et camille recupere la question et les reponses (Question,reponseA,reponseB,reponseC,reponseD)
-                               
-                bool FinQuizz = true; //bdd
-                string Question = "question";
-                string Reponse1 = "";
-                string Reponse2 = "";
-                string Reponse3 = "";
-                string Reponse4 = "";
-                
-                if (FinQuizz == true)
-                {
 
-                }
-                else
-                {
-                  return Clients.Caller.SendAsync("ReceiveQuestion", Question, Reponse1, Reponse2, Reponse3, Reponse4);
-                }
-             
+            List<ReponseClasse> ListeRepDetailsTemp = new List<ReponseClasse>();
+
+            ReponseClasse RepClasseTemp= new ReponseClasse();
+            RepClasseTemp.Question = Rep.reponses.question.NomQuestion;
+            RepClasseTemp.Nom = Rep.stagiaire.NomStagiaire;
+            RepClasseTemp.Classe = Rep.stagiaire.Classe.NomClasse;
+            RepClasseTemp.Reponse = Rep.reponses.NomReponse;
+            RepClasseTemp.Juste = Rep.reponses.question.NomQuestion;
+
+            ReponseClasse matche = ListeRepDetails.Find(x => x.Nom.Contains(RepClasseTemp.Nom) && x.Classe.Contains(RepClasseTemp.Classe) && x.Question.Contains(RepClasseTemp.Question));
+
+            if (matche != null)
+            {
+                matche = RepClasseTemp;
             }
-            return null;
-        }
-        public Task ValideQuestion(string user,string ReponseSelectionner)
-        {
-            ConnectionInfo UserTemp = ListeDesConnections.ChercheUserParNom(user);
-            if (UserTemp != null)
+            else
             {
-                //camille clement enregistre la reponse
-                //UserTemp.User 
-                //UserTemp.classe 
-                //UserTemp.Quizz
-                //UserTemp.Question
-                //ReponseSelectionner
-
-                bool QuestionJuste = true;//bdd
-                string Question = "question"; //bdd
-
-                // envoie le resultat de la question
-                return Clients.Caller.SendAsync("ReceiveResultatQuestion", Question, ReponseSelectionner, QuestionJuste);
-         
+                ListeRepDetails.Add(RepClasseTemp);
             }
-            return null;
-        }
 
-         
+            ListeRepDetailsTemp.Clear();
+            foreach (ReponseClasse RepTemp in ListeRepDetails)
+            {
+                if (RepClasseTemp.Question== RepTemp.Question)
+                {
+                    ListeRepDetailsTemp.Add(RepTemp);
+                }
+            }
+
+            if (ListeRepDetailsTemp.Count>0)
+            {
+                string StrTempRepDetails;
+                return Clients.All.SendAsync("ReceiveReponseDetails", );
+            }
+                      
+        }
 
 
 
@@ -218,5 +196,13 @@ namespace RTQuizz.Hubs
     public string classe { get; set; }
     public string Quizz { get; set; }
      public int QuestionNumero { get; set; }
+    }
+    public class ReponseClasse
+    {
+       public string  Question { get; set; }
+        public string Nom { get; set; }
+        public string Classe { get; set; }
+        public string Reponse { get; set; }
+    public string Juste { get; set; }
     }
 }
