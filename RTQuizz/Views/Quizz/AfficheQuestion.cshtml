@@ -1,11 +1,11 @@
-﻿@*@model Quizz*@
-@{
-    ViewData["Title"] = "Quizz Page";
+﻿@{
+    var Quizz = @ViewBag.Quizz;
 }
-@*<h1>@ViewBag.Formateur.idFormateur</h1>*@
-
+<div>
+    <p>@Quizz.NomQuizz</p>
+</div>
 <div class="text-center">
-    <h1 class="display-4">Question</h1>
+    <h1 class="display-4"></h1>
 </div>
 
 <br />
@@ -19,7 +19,7 @@
                    name="rep1" value="rep1">
             <label for="rep1">rep1</label>
         </div>
-            <input type="submit" name="Creer" value="Creer" />
+        <input type="submit" name="Creer" value="Creer" />
 
-</form>
+    </form>
 </div>
