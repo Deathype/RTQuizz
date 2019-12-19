@@ -27,7 +27,7 @@ connection.on("ReceiveReponseDetails", function (ListeReponsesServeur) {
     new_tbody.setAttribute("id", "TbodyRow");
 
     //TbodyRow
-    for each (var RepT in ListeRep){
+    for(var RepT in ListeRep){
 
     var tr = document.createElement("tr");
     var tdNom = document.createElement("tr");
