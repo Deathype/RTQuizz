@@ -84,6 +84,10 @@ namespace RTQuizz.Hubs
             return null;
         }
 
+         
+
+
+
         #endregion
         #region "Override"
         public override async Task OnDisconnectedAsync(Exception exception)
