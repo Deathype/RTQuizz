@@ -6,6 +6,7 @@ using DataAccessLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,11 +29,16 @@ namespace RTQuizz
             services.AddSingleton(typeof(DbRTContext));
             services.AddControllersWithViews();
             services.AddSignalR();
+
+            services.AddDbContext<DbRTContext>();
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DbRTContext context)
         {
+            context.Database.Migrate();
+            context.initData();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -58,6 +64,7 @@ namespace RTQuizz
                 endpoints.MapHub<QuizzHub>("/Quizz");
                
             });
+
      
         }
     }
