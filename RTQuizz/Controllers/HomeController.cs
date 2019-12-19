@@ -40,9 +40,6 @@ namespace RTQuizz.Controllers
             ViewBag.Formateur = forma;
 
             Quizz quizz = _dbQuizz.Quizz.SingleOrDefault(n => n.NomQuizz == nomQuizz);
-            //List<Question> questions = 
-            //List<Question, Reponses> questionReponses;
-            //List<Reponses> responses = _dbQuizz.Reponses.TakeWhile();
 
             if (quizz == null)
             {
@@ -51,7 +48,7 @@ namespace RTQuizz.Controllers
                 return View("index");
             }
 
-            Stagiaire stagiaire = _dbQuizz.Stagiaire.SingleOrDefault(n => n.NomStagiaire == nomUser && n.IdClass == 1);
+            Stagiaire stagiaire = _dbQuizz.Stagiaire.SingleOrDefault(n => n.NomStagiaire == nomUser && n.Classe.Id == 1);
             
             if (stagiaire != null)
             {
@@ -63,16 +60,19 @@ namespace RTQuizz.Controllers
             {
                 stagiaire = new Stagiaire();
                 stagiaire.NomStagiaire = nomUser;
-                stagiaire.IdClass = 1;
+                stagiaire.Classe.Id = 1;
                 _dbQuizz.Stagiaire.Add(stagiaire);
                 _dbQuizz.SaveChanges();
 
                 // Creation du stagiaire et ajout au quizz
                 view = "~/Views/Quizz/AfficheQuestion.cshtml";
             }
-
+            quizz.QuizzStagiaire.Add(new QuizzStagiaire(quizz, stagiaire));
+            
             ViewBag.Stagiaire = stagiaire;
             ViewBag.Quizz = quizz;
+            ViewBag.Question = quizz.Questions.First();
+            ViewBag.Reponses = quizz.Questions.First().ListReponses;
             return View(view);
         }
 

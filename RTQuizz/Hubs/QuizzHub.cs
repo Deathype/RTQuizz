@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccessLayer;
+using Newtonsoft.Json;
 
 namespace RTQuizz.Hubs
 {
@@ -24,60 +25,60 @@ namespace RTQuizz.Hubs
         {
             ListeRepDetails.Clear();
          } 
-         public Task EnvoieresultatQuestionClasse(Repondre Rep )
-        {
+        // public Task EnvoieresultatQuestionClasse(Repondre Rep )
+        //{
 
-            List<ReponseClasse> ListeRepDetailsTemp = new List<ReponseClasse>();
+        //    List<ReponseClasse> ListeRepDetailsTemp = new List<ReponseClasse>();
 
-            ReponseClasse RepClasseTemp= new ReponseClasse();
-            RepClasseTemp.Question = Rep.reponses.question.NomQuestion;
-            RepClasseTemp.Nom = Rep.stagiaire.NomStagiaire;
-            RepClasseTemp.Classe = Rep.stagiaire.Classe.NomClasse;
-            RepClasseTemp.Reponse = Rep.reponses.NomReponse;
-            RepClasseTemp.Juste = Rep.reponses.question.NomQuestion;
+        //    ReponseClasse RepClasseTemp= new ReponseClasse();
+        //    RepClasseTemp.Question = Rep.Reponses.Question.NomQuestion;
+        //    RepClasseTemp.Nom = Rep.Stagiaire.NomStagiaire;
+        //    RepClasseTemp.Classe = Rep.Stagiaire.Classe.NomClasse;
+        //    RepClasseTemp.Reponse = Rep.Reponses.NomReponse;
+        //    RepClasseTemp.Juste = Rep.Reponses.Question.NomQuestion;
 
-            ReponseClasse matche = ListeRepDetails.Find(x => x.Nom.Contains(RepClasseTemp.Nom) && x.Classe.Contains(RepClasseTemp.Classe) && x.Question.Contains(RepClasseTemp.Question));
+        //    ReponseClasse matche = ListeRepDetails.Find(x => x.Nom.Contains(RepClasseTemp.Nom) && x.Classe.Contains(RepClasseTemp.Classe) && x.Question.Contains(RepClasseTemp.Question));
 
-            if (matche != null)
-            {
-                matche = RepClasseTemp;
-            }
-            else
-            {
-                ListeRepDetails.Add(RepClasseTemp);
-            }
+        //    if (matche != null)
+        //    {
+        //        matche = RepClasseTemp;
+        //    }
+        //    else
+        //    {
+        //        ListeRepDetails.Add(RepClasseTemp);
+        //    }
 
-            ListeRepDetailsTemp.Clear();
-            foreach (ReponseClasse RepTemp in ListeRepDetails)
-            {
-                if (RepClasseTemp.Question== RepTemp.Question)
-                {
-                    ListeRepDetailsTemp.Add(RepTemp);
-                }
-            }
+        //    ListeRepDetailsTemp.Clear();
+        //    foreach (ReponseClasse RepTemp in ListeRepDetails)
+        //    {
+        //        if (RepClasseTemp.Question== RepTemp.Question)
+        //        {
+        //            ListeRepDetailsTemp.Add(RepTemp);
+        //        }
+        //    }
 
-            if (ListeRepDetailsTemp.Count>0)
-            {
-                string StrTempRepDetails;
-                return Clients.All.SendAsync("ReceiveReponseDetails", );
-            }
+        //    if (ListeRepDetailsTemp.Count>0)
+        //    {
+        //        string StrTempRepDetails= JsonConvert.SerializeObject(ListeRepDetailsTemp); ;
+        //        return Clients.All.SendAsync("ReceiveReponseDetails", StrTempRepDetails);
+        //    }
                       
-        }
+        //}
 
 
 
-        #endregion
-        #region "Override"
-        public override async Task OnDisconnectedAsync(Exception exception)
-        {
-            ConnectionInfo SuppUser = ListeDesConnections.ChercheUserParConnectionId(Context.ConnectionId);
-            if (SuppUser != null)
-            {
-                await Groups.RemoveFromGroupAsync(Context.ConnectionId, SuppUser.Quizz);
-                ListeDesConnections.DeleteUser(SuppUser);              
-            }           
-            await base.OnDisconnectedAsync(exception);       
-        }
+        //#endregion
+        //#region "Override"
+        //public override async Task OnDisconnectedAsync(Exception exception)
+        //{
+        //    ConnectionInfo SuppUser = ListeDesConnections.ChercheUserParConnectionId(Context.ConnectionId);
+        //    if (SuppUser != null)
+        //    {
+        //        await Groups.RemoveFromGroupAsync(Context.ConnectionId, SuppUser.Quizz);
+        //        ListeDesConnections.DeleteUser(SuppUser);              
+        //    }           
+        //    await base.OnDisconnectedAsync(exception);       
+        //}
 
         #endregion
         #region "Fonction intermediaire"

@@ -12,8 +12,6 @@ namespace DataAccessLayer
         public int Id { get; set; }
         public String NomReponse { get; set; }
         public Boolean BonneReponse { get; set; }
-
-        
         public Question Question { get; set; }
    
     }

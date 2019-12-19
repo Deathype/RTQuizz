@@ -29,14 +29,26 @@ connection.on("ReceiveReponseDetails", function (ListeReponsesServeur) {
     //    var LRS = { Nom:, Reponse:,Juste:}
     //}
 
-    foreach(var Rep in ListeRep){
-    document.getElementById("ReponseList").innerHTML(Rep.);
+    var new_tbody = document.createElement('tbody');
+
+   
+    for each(var RepT in ListeRep){
+
+    var tr = document.createElement("tr");
+    var tdNom = document.createElement("tr");
+    var tdReponse = document.createElement("tr");
+    var tdJuste = document.createElement("tr");
+
+    tdNom.textContent = RepT.Nom;
+    tdReponse.textContent = RepT.Reponse;
+    tdJuste.textContent = RepT.Juste;
+
+    tr.appendChild(tdNom);
+    tr.appendChild(tdReponse);
+    tr.appendChild(tdJuste);
 
 }
 
-    console.log(ListeRep)
-    //var li = document.createElement("li");
-    //li.textContent = encodedMsg;
+document.getElementById("tableRep").parentNode.replaceChild(new_tbody, document.getElementById("tableRep"));
 
-   // document.getElementById("ReponseList").innerHTML(msg);
 });
