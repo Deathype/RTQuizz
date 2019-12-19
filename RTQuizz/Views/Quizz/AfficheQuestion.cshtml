@@ -1,13 +1,13 @@
 ﻿@{
     var Quizz = @ViewBag.Quizz;
     var Question = @ViewBag.Question;
-    var Reponses = @ViewBag.Responses;
+    var Reponses = @ViewBag.Reponses;
 }
 <div>
     <p>@Quizz.NomQuizz</p>
 </div>
 <div class="text-center">
-    <h1 class="display-4">@Question</h1>
+    <h1 class="display-4">@Question.NomQuestion</h1>
 </div>
 
 <br />
@@ -16,17 +16,18 @@
 
 <div class="text-lg-center">
     <form method="POST" action="@Url.Action("ValidReponse", "Quizz")">
+        
         <div>
             @{
                 @foreach (var reponse in @Reponses)
                 {
-                    <input type="radio" id="reponse.Id"
-                           name="reponse.Id" value="reponse.NomReponse">
-                    <label for="reponse.Id">reponse.NomReponse</label>
+                    <input type="radio" id="@reponse.Id"
+                           name="@reponse.Id" value="@reponse.NomReponse">
+                    <label for="@reponse.Id">@reponse.NomReponse</label>
                 }
             }
         </div>
-        <input type="submit" name="Creer" value="Creer" />
+        <input type="submit" name="Valider" value="Valider" />
 
     </form>
 </div>
