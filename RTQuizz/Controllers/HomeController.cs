@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RTQuizz.Hubs;
 using RTQuizz.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace RTQuizz.Controllers
 {
@@ -22,6 +23,7 @@ namespace RTQuizz.Controllers
         {
             _logger = logger;
             this._dbQuizz = dbQuizz;
+            _dbQuizz.initData();
         }
 
         public IActionResult Index()
@@ -39,7 +41,7 @@ namespace RTQuizz.Controllers
             forma.Id = 1;
             ViewBag.Formateur = forma;
 
-            Quizz quizz = _dbQuizz.Quizz.SingleOrDefault(n => n.NomQuizz == nomQuizz);
+            Quizz quizz = _dbQuizz.Quizz.Include(q => q.Questions).ThenInclude(q => q.ListReponses).SingleOrDefault(n => n.NomQuizz == nomQuizz);
 
             if (quizz == null)
             {
@@ -67,11 +69,22 @@ namespace RTQuizz.Controllers
                 // Creation du stagiaire et ajout au quizz
                 view = "~/Views/Quizz/AfficheQuestion.cshtml";
             }
-            quizz.QuizzStagiaire.Add(new QuizzStagiaire(quizz, stagiaire));
+            _dbQuizz.QuizzStagiaire.Add(new QuizzStagiaire(quizz, stagiaire));
             
             ViewBag.Stagiaire = stagiaire;
             ViewBag.Quizz = quizz;
+            if(quizz.Questions.Count() == 0)
+            {
+                message = "Le Quizz ne comporte aucunes questions, impossible de jouer ☺";
+                ViewBag.message = message;
+                return View("index");
+            }
             ViewBag.Question = quizz.Questions.First();
+            var reponses = quizz.Questions.First().ListReponses;
+            if (reponses == null)
+            {
+                //reponses = new Reponses();
+            }
             ViewBag.Reponses = quizz.Questions.First().ListReponses;
             return View(view);
         }

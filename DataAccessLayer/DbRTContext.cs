@@ -54,14 +54,14 @@ namespace DataAccessLayer
             //  .HasOne<Quizz>(sc => sc.Quizz)
             //   .WithMany(s => s.ListParticipe)
             //   .HasForeignKey(p => p.QuizzId);
-            initData();
+            //initData();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=QuizDB2;Trusted_Connection=True;");
         }
 
-        private void initData()
+        public void initData()
         {
             if (Formateurs.Any())
                 return;
@@ -106,10 +106,9 @@ namespace DataAccessLayer
 
             var Quest = new Question()
             {
-                NomQuestion="Quelle est l'outil responsable de mapping objet en C#",
+                NomQuestion = "Quelle est l'outil responsable de mapping objet en C#",
                 //Theme="c#",
-
-
+                Id = 1,
             };
            Question.Add(Quest);
 
