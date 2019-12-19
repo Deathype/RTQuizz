@@ -23,7 +23,7 @@ namespace RTQuizz.Controllers
         {
             _logger = logger;
             this._dbQuizz = dbQuizz;
-            _dbQuizz.initData();
+            
         }
 
         public IActionResult Index()
