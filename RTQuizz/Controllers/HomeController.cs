@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAccessLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RTQuizz.Hubs;
 using RTQuizz.Models;
 
 namespace RTQuizz.Controllers
@@ -29,7 +30,7 @@ namespace RTQuizz.Controllers
         }
 
         [HttpPost]
-        public ActionResult RunQuizz(String prenomUser, String nomUser, String nomQuizz)
+        public async Task<ActionResult> RunQuizz(String nomUser, String nomQuizz)
         {
             String message = "";
             String view;
@@ -42,10 +43,19 @@ namespace RTQuizz.Controllers
             {
 
                 Quizz quizz = _dbQuizz.Quizz.Find(nomQuizz);
-                ViewBag.Quizz = quizz;
+                
 
+<<<<<<< HEAD
                 if (_dbQuizz.Stagiaire.Any(s => s.IdStagiaire == nomUser) && _dbQuizz.Stagiaire.Any(s => s.prenom == prenomUser))
+=======
+                if (_dbQuizz.Stagiaire.Any(s => s.NomStagiaire == nomUser))
+>>>>>>> b018eb3c6de272fdbc6f5ccf66991ea8323cb629
                 {
+                    Stagiaire stagiaire = _dbQuizz.Stagiaire.Find(nomUser);
+                    
+                    ViewBag.Stagiaire = stagiaire;
+                    ViewBag.Quizz = quizz;
+                    //await QuizzHub.Instance.ConnecterUserQuizz(nomUser, "ril18", nomQuizz);
                     // Ajout du stagiaire au quizz
                     view = "~/Views/Quizz/AfficheQuestion.cshtml";
                 }
