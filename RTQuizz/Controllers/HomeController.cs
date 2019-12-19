@@ -62,7 +62,7 @@ namespace RTQuizz.Controllers
             {
                 stagiaire = new Stagiaire();
                 stagiaire.NomStagiaire = nomUser;
-                stagiaire.Classe.Id = 1;
+                stagiaire.Classe = _dbQuizz.Classe.First() ;
                 _dbQuizz.Stagiaire.Add(stagiaire);
                 _dbQuizz.SaveChanges();
 

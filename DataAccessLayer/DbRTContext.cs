@@ -58,7 +58,7 @@ namespace DataAccessLayer
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=QuizDB2;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=QuizDB;Trusted_Connection=True;");
         }
 
         public void initData()
@@ -108,7 +108,7 @@ namespace DataAccessLayer
             {
                 NomQuestion = "Quelle est l'outil responsable de mapping objet en C#",
                 //Theme="c#",
-                Id = 1,
+                //Id = 1,
             };
            Question.Add(Quest);
 
