@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using DataAccessLayer;
+using RTQuizz.Hubs;
 
 namespace RTQuizz.Controllers
 {
@@ -18,9 +20,17 @@ namespace RTQuizz.Controllers
         {
 
 
+            //pour test signalr
+            Repondre testrep = new Repondre();
+            testrep.Reponses.Question.NomQuestion = "Esquec'estlol?";
+            testrep.Stagiaire.NomStagiaire = "le bleu";
+            testrep.Stagiaire.Classe.NomClasse = "ril18";
+            testrep.Reponses.NomReponse = "eededf";
+            testrep.Reponses.BonneReponse = true;
 
-            
-            return View();
+             QuizzHub.Instance.EnvoieresultatQuestionClasse(testrep);
+
+            return View("~/Views/Quizz/ResultQuestion.cshtml");
         }
 
 
