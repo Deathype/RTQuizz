@@ -17,6 +17,7 @@ namespace RTQuizz.Hubs
         public QuizzHub()
         {
             _Instance = this;
+          
         }
        
         #region "Fonction perso"
