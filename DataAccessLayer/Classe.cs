@@ -7,10 +7,11 @@ namespace DataAccessLayer
 {
     public class Classe
     {
-        [Key]
-        public int IdClass { get; set; }
+       
+        public int Id { get; set; }
         public String NomClasse { get; set; }
 
         public int NombreEleve { get; set; }
+       
     }
 }

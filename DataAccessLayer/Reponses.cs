@@ -8,15 +8,13 @@ namespace DataAccessLayer
 {
     public class Reponses
     {
-        [Key]
-        public int IdReponse { get; set; }
+      
+        public int Id { get; set; }
         public String NomReponse { get; set; }
         public Boolean BonneReponse { get; set; }
 
-        [ForeignKey("IdQuestion")]
-        public Question question { get; set; }
-
         
-        public int IdQuestion { get; set; }
+        public Question Question { get; set; }
+   
     }
 }

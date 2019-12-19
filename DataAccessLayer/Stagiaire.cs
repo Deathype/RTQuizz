@@ -9,14 +9,13 @@ namespace DataAccessLayer
     public class Stagiaire
     {
 
-        [Key]
-        public int IdStagiaire { get; set; }
+      
+        public int StagiaireId { get; set; }
         public String NomStagiaire { get; set; }
 
-        [ForeignKey("IdClass")]
         public Classe Classe { get; set; }
+     //   public List<Quizz> ListQuizz { get; set; }
 
-        
-        public int IdClass { get; set; }
+        public IList<QuizzStagiaire> QuizzStagiaire { get; set; }
     }
 }

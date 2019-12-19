@@ -8,10 +8,14 @@ namespace DataAccessLayer
 {
      public  class Question
     {
-        [Key]
-        public int IdQuestion { get; set; }
+        
+        public int Id { get; set; }
         public String Theme { get; set; }
         public String NomQuestion { get; set; }
+        public IList<QuizzQuestion> QuizzQuestion { get; set; }
+    }
+    //public List<Reponses> ListReponses { get; set; }
+
 
     }
-}
+

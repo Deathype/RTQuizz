@@ -9,8 +9,8 @@ namespace DataAccessLayer
     [Table("Formateur")]
    public class Formateur
     {
-        [Key]
-        public int idFormateur { get; set; }
+        
+        public int Id { get; set; }
 
         public String Nom { get; set; }
 

@@ -21,21 +21,42 @@ namespace DataAccessLayer
          public DbSet<Stagiaire> Stagiaire { get; set; }
 
          public DbSet<Classe> Classe { get; set; }
-         public DbSet<Composer> Composer { get; set; }
-        public DbSet<Participe> Participe { get; set; }
+
+        public DbSet<QuizzQuestion> QuizzQuestion { get; set; }
+        public DbSet<QuizzStagiaire> QuizzStagiaire { get; set; }
+        //  public DbSet<Composer> Composer { get; set; }
+
+        //public DbSet<Participe> Participe { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Repondre>()
-                .HasKey(r => new { r.IdStagiaire, r.IdQuestion, r.IdReponse });
-            modelBuilder.Entity<Composer>()
-                .HasKey(r => new { r.IdQuestion, r.IdQuizz});
-            modelBuilder.Entity<Participe>()
-               .HasKey(r => new { r.IdStagiaire, r.IdQuizz });
+            modelBuilder.Entity<QuizzQuestion>().HasKey(sc => new { sc.QuizzId, sc.QuestionId });
+            modelBuilder.Entity<QuizzStagiaire>().HasKey(sc => new { sc.QuizzId, sc.StagiaireId });
+            modelBuilder.Entity<Repondre>().HasKey(sc => new { sc.StagiaireId, sc.ReponsesId, sc.QuestionId });
+
+
+            //modelBuilder.Entity<Repondre>()
+            //    .HasKey(r => new { r.StagiaireId, r.QuestionId, r.Id });
+
+            // modelBuilder.Entity<Composer>()
+            //     .HasKey(r => new { r.QuestionId, r.QuizzId});
+            // modelBuilder.Entity<Participe>()
+            //    .HasKey(r => new { r.StagiaireId, r.QuizzId });
+
+            //modelBuilder.Entity<Participe>()
+            //    .HasOne<Stagiaire>(sc => sc.Stagiaire)
+            //     .WithMany(s => s.ListParticipe)
+            //     .HasForeignKey(p => p.StagiaireId);
+
+            // modelBuilder.Entity<Participe>()
+            //  .HasOne<Quizz>(sc => sc.Quizz)
+            //   .WithMany(s => s.ListParticipe)
+            //   .HasForeignKey(p => p.QuizzId);
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=QuizDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=QuizDB2;Trusted_Connection=True;");
         }
     }
 }

@@ -2,18 +2,26 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
 
 namespace DataAccessLayer
 {
-   public class Quizz
+    public class Quizz
     {
-        [Key]
-        public int idQuizz { get; set; }
+
+        public int Id { get; set; }
         public String NomQuizz { get; set; }
         public String ThemeQuizz { get; set; }
-     [ForeignKey("IdFormateur")]
-        public Formateur formateur { get; set; }
-    
+        public Formateur Formateur { get; set; }
+       // public List<Question> ListQuestion { get; set; }
+        public IList<QuizzQuestion> QuizzQuestion { get; set; }
+        public IList<QuizzStagiaire> QuizzStagiaire { get; set; }
+
+     //   public List<Stagiaire> ListeStagiaire { get; set; }
     }
+
+
+
 }
+

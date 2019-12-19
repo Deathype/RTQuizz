@@ -9,20 +9,15 @@ namespace DataAccessLayer
     public class Repondre
     {
 
-        [ForeignKey("IdStagiaire")]
-        public Stagiaire stagiaire { get; set; }
 
-        [Key, Column(Order = 0)]
-        public int IdStagiaire { get; set; }
-       [ForeignKey("IdQuestion")]
-        public Question question { get; set; }
-        [Key, Column(Order = 1)]
-        public int IdQuestion { get; set; }
-        [Key, Column(Order = 2)]
-        public int IdReponse { get; set; }
-        [ForeignKey("IdReponse")]
-        public Reponses reponses { get; set; }
-        public String RepStagiaire { get; set; }
+        public Stagiaire Stagiaire { get; set; }
+         public Question Question { get; set; }
+         public Reponses Reponses { get; set; }
+        public string RepStagiaire { get; set; }
+
+        public int StagiaireId { get; set; }
+        public int QuestionId { get; set; }
+        public int ReponsesId { get; set; }
 
     }
 }

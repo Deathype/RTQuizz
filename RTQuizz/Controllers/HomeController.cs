@@ -36,7 +36,7 @@ namespace RTQuizz.Controllers
             String view;
 
             Formateur forma = new Formateur();
-            forma.idFormateur = 1;
+            forma.Id = 1;
             ViewBag.Formateur = forma;
 
             if (_dbQuizz.Quizz.Any(q => q.NomQuizz == nomQuizz))
