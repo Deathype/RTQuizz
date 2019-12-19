@@ -2,13 +2,6 @@
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/Quizz").build();
 
-class ListeReponseServeurClasse {
-    Nom;
-    Reponse;
-    Juste;
-}
-
-
 //connection.start().then(function () {
 //    document.getElementById("sendButton").disabled = false;
 //}).catch(function (err) {
@@ -16,8 +9,8 @@ class ListeReponseServeurClasse {
 //});
 
 connection.on("ReceiveReponseDetails", function (ListeReponsesServeur) {
-    var Reponse = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    var encodedMsg = user;
+   // var Reponse = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+   // var encodedMsg = user;
 
     //var args = Array.prototype.slice.call(ListeReponses);
     ////// Avec ECMAScript 2015 / ES6
@@ -28,11 +21,13 @@ connection.on("ReceiveReponseDetails", function (ListeReponsesServeur) {
     //for (var i = 0; i < args.length; i+=3) {
     //    var LRS = { Nom:, Reponse:,Juste:}
     //}
-
+       
+    var Ancientbody = document.getElementById('TbodyRow');
     var new_tbody = document.createElement('tbody');
+    new_tbody.setAttribute("id", "TbodyRow");
 
-   
-    for each(var RepT in ListeRep){
+    //TbodyRow
+    for each (var RepT in ListeRep){
 
     var tr = document.createElement("tr");
     var tdNom = document.createElement("tr");
@@ -47,8 +42,9 @@ connection.on("ReceiveReponseDetails", function (ListeReponsesServeur) {
     tr.appendChild(tdReponse);
     tr.appendChild(tdJuste);
 
+    new_tbody.appendChild(tr);
 }
 
-document.getElementById("tableRep").parentNode.replaceChild(new_tbody, document.getElementById("tableRep"));
+Ancientbody.parentNode.replaceChild(new_tbody, Ancientbody);
 
 });
