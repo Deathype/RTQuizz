@@ -30,7 +30,7 @@ namespace RTQuizz.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> RunQuizz(String nomUser, String nomQuizz)
+        public ActionResult RunQuizz(String nomUser, String nomQuizz)
         {
             String message = "";
             String view;
@@ -42,24 +42,30 @@ namespace RTQuizz.Controllers
             if (_dbQuizz.Quizz.Any(q => q.NomQuizz == nomQuizz))
             {
 
-                Quizz quizz = _dbQuizz.Quizz.Find(nomQuizz);
-                
+                Quizz quizz = _dbQuizz.Quizz.Single(n => n.NomQuizz == nomQuizz);
+
 
                 if (_dbQuizz.Stagiaire.Any(s => s.NomStagiaire == nomUser))
                 {
-                    Stagiaire stagiaire = _dbQuizz.Stagiaire.Find(nomUser);
+                    Stagiaire stagiaire = _dbQuizz.Stagiaire.Single(n => n.NomStagiaire == nomUser);
                     
                     ViewBag.Stagiaire = stagiaire;
-                    ViewBag.Quizz = quizz;
-                    //await QuizzHub.Instance.ConnecterUserQuizz(nomUser, "ril18", nomQuizz);
                     // Ajout du stagiaire au quizz
                     view = "~/Views/Quizz/AfficheQuestion.cshtml";
                 }
                 else
                 {
+                    Stagiaire stagiaire = new Stagiaire();
+                    stagiaire.NomStagiaire = nomUser;
+                    stagiaire.IdClass = 1;
+                    _dbQuizz.Stagiaire.Add(stagiaire);
+                    _dbQuizz.SaveChanges();
+                    ViewBag.Stagiaire = stagiaire;
+                    
                     // Creation du stagiaire et ajout au quizz
                     view = "~/Views/Quizz/AfficheQuestion.cshtml";
                 }
+                ViewBag.Quizz = quizz;
             }
             else
             {
