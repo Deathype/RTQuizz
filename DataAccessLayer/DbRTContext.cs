@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 
@@ -53,11 +54,95 @@ namespace DataAccessLayer
             //  .HasOne<Quizz>(sc => sc.Quizz)
             //   .WithMany(s => s.ListParticipe)
             //   .HasForeignKey(p => p.QuizzId);
-
+            initData();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=QuizDB2;Trusted_Connection=True;");
+        }
+
+        private void initData()
+        {
+            if (Formateurs.Any())
+                return;
+
+            var Fr = new Formateur()
+            {
+                Nom = "Bill",
+                Prenom = "Dupont",
+                ProfMatiere = "Gestion de projet"
+
+            };
+            Formateurs.Add(Fr);
+
+            var LaClasse = new Classe();
+            LaClasse.NombreEleve = 5;
+            LaClasse.NomClasse = "Ril18";
+            Classe.Add(LaClasse);
+
+            var Stg = new Stagiaire()
+
+            {
+                NomStagiaire = "Marouen",
+                Classe = LaClasse,
+            };
+            Stagiaire.Add(Stg);
+
+            var LeQuiz = new Quizz()
+            {
+                NomQuizz = "Découvrir C#",
+                ThemeQuizz = "C#",
+                Formateur=Fr,
+            };
+            Quizz.Add(LeQuiz);
+
+            var QuizzStag = new QuizzStagiaire()
+            {
+                Quizz = LeQuiz,
+                Stagiaire=Stg,
+
+            };
+            QuizzStagiaire.Add(QuizzStag);
+
+            var Quest = new Question()
+            {
+                NomQuestion="Quelle est l'outil responsable de mapping objet en C#",
+                //Theme="c#",
+
+
+            };
+           Question.Add(Quest);
+
+            var QuizzQuest = new QuizzQuestion()
+            {
+               Question=Quest,
+               Quizz=LeQuiz,
+
+            };
+          QuizzQuestion.Add(QuizzQuest);
+
+            var Rep = new Reponses()
+            {
+                NomReponse = "Entity framework ",
+                BonneReponse=true,
+                Question=Quest,
+
+            };
+            Reponses.Add(Rep);
+
+
+            var Repond = new Repondre()
+            {
+                Question = Quest,
+                Stagiaire = Stg,
+              Reponses=Rep,
+
+            };
+            Repondre.Add(Repond);
+
+
+            SaveChanges();
+
         }
     }
 }
