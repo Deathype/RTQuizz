@@ -83,9 +83,9 @@ namespace RTQuizz.Controllers
             var reponses = quizz.Questions.First().ListReponses;
             if (reponses == null)
             {
-                //reponses = new Reponses();
+                return View("Index");
             }
-            ViewBag.Reponses = quizz.Questions.First().ListReponses;
+            ViewBag.Reponses = reponses;
             return View(view);
         }
 
