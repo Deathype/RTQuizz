@@ -15,6 +15,7 @@ namespace DataAccessLayer
 
         public DbSet<Quizz> Quizz{ get; set; }
 
+
         public DbSet<Repondre> Repondre { get; set; }
 
          public DbSet<Reponses> Reponses { get; set; }

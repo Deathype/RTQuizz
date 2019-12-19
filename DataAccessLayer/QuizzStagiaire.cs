@@ -12,6 +12,12 @@ namespace DataAccessLayer
         public int StagiaireId { get; set; }
         public Stagiaire Stagiaire { get; set; }
 
+        public QuizzStagiaire(Quizz Quizz, Stagiaire stagiaire)
+        {
+            this.Quizz = Quizz;
+            this.Stagiaire = Stagiaire;
+        }
 
+        public QuizzStagiaire() { }
     }
 }
