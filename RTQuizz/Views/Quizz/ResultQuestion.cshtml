@@ -12,28 +12,20 @@
 <br />
 
 <div class="text-lg-center">
-    <table>
+    <table id="tableRep">
         <thead>
             <tr>
-                <td>PRENOMS</td>
-                <td>REPONSES</td>
+                <th>Nom</th>
+                <th>Reponse</th>
+                <th>Resultat</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>PRENOMS</td>
-                <td>REPONSES</td>
-            </tr>
+        <tbody id="TbodyRow">
+           
         </tbody>
     </table>
 </div>
 @************************************************************@
-<div class="row">
-    <div class="col-6">
-        <ul id="ReponseListNom"></ul>
-        <ul id="ReponseListReponse"></ul>
-        <ul id="ReponseListJuste"></ul>
-    </div>
-</div>
+
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/ResultQuestion.js"></script>

@@ -59,13 +59,13 @@ namespace RTQuizz.Hubs
             if (ListeRepDetailsTemp.Count>0)
             {
                 string StrTempRepDetails;
-                return Clients.All.SendAsync("ReceiveReponseDetails", );
+                return Clients.All.SendAsync("ReceiveReponseDetails");
             }
                       
         }
 
 
-
+         
         #endregion
         #region "Override"
         public override async Task OnDisconnectedAsync(Exception exception)

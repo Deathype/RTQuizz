@@ -15,10 +15,11 @@ namespace DataAccessLayer
         public String ThemeQuizz { get; set; }
         public Formateur Formateur { get; set; }
        // public List<Question> ListQuestion { get; set; }
-        public IList<QuizzQuestion> QuizzQuestion { get; set; }
+        public IList<Question> Questions { get; set; }
         public IList<QuizzStagiaire> QuizzStagiaire { get; set; }
 
-     //   public List<Stagiaire> ListeStagiaire { get; set; }
+        //   public List<Stagiaire> ListeStagiaire { get; set; }
+
     }
 
 
