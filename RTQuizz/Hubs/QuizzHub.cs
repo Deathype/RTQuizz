@@ -25,46 +25,45 @@ namespace RTQuizz.Hubs
       public void ClearListReponse()
         {
             ListeRepDetails.Clear();
-         } 
-        // public Task EnvoieresultatQuestionClasse(Repondre Rep )
-        //{
+         }
+        public Task EnvoieresultatQuestionClasse(Repondre Rep)
+        {
+            List<ReponseClasse> ListeRepDetailsTemp = new List<ReponseClasse>();
 
-        //    List<ReponseClasse> ListeRepDetailsTemp = new List<ReponseClasse>();
+            ReponseClasse RepClasseTemp = new ReponseClasse();
+            RepClasseTemp.Question = Rep.Reponses.Question.NomQuestion;
+            RepClasseTemp.Nom = Rep.Stagiaire.NomStagiaire;
+            RepClasseTemp.Classe = Rep.Stagiaire.Classe.NomClasse;
+            RepClasseTemp.Reponse = Rep.Reponses.NomReponse;
+            RepClasseTemp.Juste = Rep.Reponses.BonneReponse;
 
-        //    ReponseClasse RepClasseTemp= new ReponseClasse();
-        //    RepClasseTemp.Question = Rep.Reponses.Question.NomQuestion;
-        //    RepClasseTemp.Nom = Rep.Stagiaire.NomStagiaire;
-        //    RepClasseTemp.Classe = Rep.Stagiaire.Classe.NomClasse;
-        //    RepClasseTemp.Reponse = Rep.Reponses.NomReponse;
-        //    RepClasseTemp.Juste = Rep.Reponses.Question.NomQuestion;
+            ReponseClasse matche = ListeRepDetails.Find(x => x.Nom.Contains(RepClasseTemp.Nom) && x.Classe.Contains(RepClasseTemp.Classe) && x.Question.Contains(RepClasseTemp.Question));
 
-        //    ReponseClasse matche = ListeRepDetails.Find(x => x.Nom.Contains(RepClasseTemp.Nom) && x.Classe.Contains(RepClasseTemp.Classe) && x.Question.Contains(RepClasseTemp.Question));
+            if (matche != null)
+            {
+                matche = RepClasseTemp;
+            }
+            else
+            {
+                ListeRepDetails.Add(RepClasseTemp);
+            }
 
-        //    if (matche != null)
-        //    {
-        //        matche = RepClasseTemp;
-        //    }
-        //    else
-        //    {
-        //        ListeRepDetails.Add(RepClasseTemp);
-        //    }
+            ListeRepDetailsTemp.Clear();
+            foreach (ReponseClasse RepTemp in ListeRepDetails)
+            {
+                if (RepClasseTemp.Question == RepTemp.Question)
+                {
+                    ListeRepDetailsTemp.Add(RepTemp);
+                }
+            }
 
-        //    ListeRepDetailsTemp.Clear();
-        //    foreach (ReponseClasse RepTemp in ListeRepDetails)
-        //    {
-        //        if (RepClasseTemp.Question== RepTemp.Question)
-        //        {
-        //            ListeRepDetailsTemp.Add(RepTemp);
-        //        }
-        //    }
-
-        //    if (ListeRepDetailsTemp.Count>0)
-        //    {
-        //        string StrTempRepDetails= JsonConvert.SerializeObject(ListeRepDetailsTemp); ;
-        //        return Clients.All.SendAsync("ReceiveReponseDetails", StrTempRepDetails);
-        //    }
-                      
-        //}
+            if (ListeRepDetailsTemp.Count > 0)
+            {
+                string StrTempRepDetails = JsonConvert.SerializeObject(ListeRepDetailsTemp); ;
+                return Clients.All.SendAsync("ReceiveReponseDetails", StrTempRepDetails);
+            }
+            return null;
+        }
 
 
 
@@ -83,7 +82,7 @@ namespace RTQuizz.Hubs
 
         #endregion
         #region "Fonction intermediaire"
-      
+
         #endregion
         //***********************************************************************************
         //public override async Task OnConnectedAsync()
@@ -205,6 +204,6 @@ namespace RTQuizz.Hubs
         public string Nom { get; set; }
         public string Classe { get; set; }
         public string Reponse { get; set; }
-    public string Juste { get; set; }
+    public bool Juste { get; set; }
     }
 }
