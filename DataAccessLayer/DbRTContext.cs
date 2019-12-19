@@ -107,7 +107,7 @@ namespace DataAccessLayer
             var Quest = new Question()
             {
                 NomQuestion="Quelle est l'outil responsable de mapping objet en C#",
-                Theme="c#",
+                //Theme="c#",
 
 
             };
