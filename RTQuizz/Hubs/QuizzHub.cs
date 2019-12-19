@@ -35,7 +35,7 @@ namespace RTQuizz.Hubs
             RepClasseTemp.Nom = Rep.Stagiaire.NomStagiaire;
             RepClasseTemp.Classe = Rep.Stagiaire.Classe.NomClasse;
             RepClasseTemp.Reponse = Rep.Reponses.NomReponse;
-            RepClasseTemp.Juste = Rep.Reponses.Question.NomQuestion;
+            RepClasseTemp.Juste = Rep.Reponses.BonneReponse;
 
             ReponseClasse matche = ListeRepDetails.Find(x => x.Nom.Contains(RepClasseTemp.Nom) && x.Classe.Contains(RepClasseTemp.Classe) && x.Question.Contains(RepClasseTemp.Question));
 
@@ -204,6 +204,6 @@ namespace RTQuizz.Hubs
         public string Nom { get; set; }
         public string Classe { get; set; }
         public string Reponse { get; set; }
-    public string Juste { get; set; }
+    public bool Juste { get; set; }
     }
 }
