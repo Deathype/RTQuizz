@@ -140,7 +140,6 @@ namespace DataAccessLayer
             var quizz1 = AddQuizz("Découvrir C#", "C#", formateur);
             var quizzLinq = AddQuizz("Linq", "C#", formateur);
 
-            SaveChanges();
             // Association QuizzStagiaire
             AddQuizzStagiaire(quizz1, stagiaireMarouen);
             AddQuizzStagiaire(quizz1, stagiaireGuillaume);
@@ -158,8 +157,6 @@ namespace DataAccessLayer
             AddQuizzStagiaire(quizzLinq, stagiaireTiffaine);
             AddQuizzStagiaire(quizzLinq, stagiaireNicolas);
 
-            SaveChanges();
-
             // Ajout de questions
             var q1 = AddQuestion("Quelle est l'outil responsable de mapping objet en C#");
 
@@ -174,7 +171,6 @@ namespace DataAccessLayer
             var qLinq9 = AddQuestion("Linq q9");
             var qLinq10 = AddQuestion("Linq q10");
 
-            SaveChanges();
             // Association Quizz et questions
             AddQuizzQuestion(quizz1, q1);
             AddQuizzQuestion(quizzLinq, qLinq1);
@@ -188,7 +184,6 @@ namespace DataAccessLayer
             AddQuizzQuestion(quizzLinq, qLinq9);
             AddQuizzQuestion(quizzLinq, qLinq10);
 
-            SaveChanges();
             // Ajout de réponses
             var repQ1 = AddReponses("Entity framework", true, q1);
 
@@ -239,7 +234,6 @@ namespace DataAccessLayer
             AddReponses("C", false, qLinq10);
             AddReponses("D", false, qLinq10);
 
-            SaveChanges();
             // Ajout de réponses d'une stagiaire
             AddRepondre(stagiaireMarouen, q1, repQ1, repQ1.NomReponse);
 
