@@ -17,7 +17,7 @@
 
 <div class="text-lg-center">
     <form method="POST" action="@Url.Action("ValidReponse", "Quizz")">
-        <input id="stagiaireId" name="stagiaieId" type="hidden" value="@Stagiaire.StagiaireId">
+        <input id="stagiaireId" name="stagiaireId" type="hidden" value="@Stagiaire.StagiaireId">
         <input id="quizzId" name="quizzId" type="hidden" value="@Quizz.Id">
         <input id="questionId" name="questionId" type="hidden" value="@Question.Id">
         <div>
@@ -25,8 +25,8 @@
                 @foreach (var reponse in @Reponses)
                 {
                     <input type="radio" id="@reponse.Id"
-                           name="reponseId" value="@reponse.NomReponse">
-                    <label for="reponseId">@reponse.NomReponse</label>
+                           name="reponseId" value="@reponse.Id">
+                    <label for="NomReponse">@reponse.NomReponse</label>
                 }
             }
         </div>

@@ -1,9 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Quizz Page";
-    var Quizz = @ViewBag.Quizz;
-    var Classe = @ViewBag.Classe;
+
 }
 @*<h1>@ViewBag.Formateur.idFormateur</h1>*@
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/ResultQuestion.js"></script>
 
 <div class="text-center">
     <h1 class="display-4">Resultats</h1>
@@ -23,11 +25,9 @@
                 <th>Resultat</th>
             </tr>
         </thead>
-        <tbody id="TbodyRow">           
+        <tbody id="TbodyRow">
         </tbody>
     </table>
 </div>
 @************************************************************@
 
-<script src="~/js/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/ResultQuestion.js"></script>

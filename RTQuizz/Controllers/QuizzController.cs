@@ -13,11 +13,13 @@ namespace RTQuizz.Controllers
     {
         private readonly ILogger<QuizzController> _logger;
         private DbRTContext _dbQuizz;
+        private QuizzHub _QuizzHub;
 
-        public QuizzController(ILogger<QuizzController> logger, DbRTContext dbQuizz)
+        public QuizzController(ILogger<QuizzController> logger, DbRTContext dbQuizz, QuizzHub quizzHub)
         {
             _logger = logger;
             this._dbQuizz = dbQuizz;
+            this._QuizzHub = quizzHub;
 
         }
 
@@ -27,23 +29,29 @@ namespace RTQuizz.Controllers
         }
 
         [HttpPost]
-        public ActionResult ValidReponse()
+        public ActionResult ValidReponse(int stagiaireId, int quizzId, int questionId, int reponseId)
         {
-
+            //ReponseClasse RepClasseTemp = new ReponseClasse();
+            //RepClasseTemp.Question = Rep.Reponses.Question.NomQuestion;
+            //RepClasseTemp.Nom = Rep.Stagiaire.NomStagiaire;
+            //RepClasseTemp.Classe = Rep.Stagiaire.Classe.NomClasse;
+            //RepClasseTemp.Reponse = Rep.Reponses.NomReponse;
+            //RepClasseTemp.Juste = Rep.Reponses.BonneReponse;
 
             //pour test signalr
             Repondre testrep = new Repondre();
-            testrep.Reponses.Question.NomQuestion = "Esquec'estlol?";
-            testrep.Stagiaire.NomStagiaire = "le bleu";
-            testrep.Stagiaire.Classe.NomClasse = "ril18";
-            testrep.Reponses.NomReponse = "eededf";
-            testrep.Reponses.BonneReponse = true;
+                              
 
 
-            QuizzHub.Instance.AjoutResultat(testrep);
+            testrep.Stagiaire = _dbQuizz.Stagiaire.Single(a => a.StagiaireId == stagiaireId);
+            testrep.Question = _dbQuizz.Question.Single(a => a.Id == questionId);
+            testrep.Reponses = _dbQuizz.Reponses.Single(r => r.Id == reponseId);
+            // testrep.RepStagiaire
+
+            _QuizzHub.AjoutResultat(testrep);
 
             ViewBag.Classe = testrep.Stagiaire.Classe.NomClasse;
-            ViewBag.Question= testrep.Question.NomQuestion;
+            ViewBag.Question = testrep.Question.NomQuestion;
 
             return View("~/Views/Quizz/ResultQuestion.cshtml");
         }
