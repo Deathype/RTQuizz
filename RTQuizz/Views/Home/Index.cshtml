@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
     var message = @ViewBag.message;
+    var listQuizz = @ViewBag.listQuizz;
 }
 
 <div class="text-center">
@@ -15,10 +16,17 @@
         Nom :
         <br />
         <input type="text" id="nomUser" name="nomUser" required>
-        <br/>
+        <br />
         Code Quizz :
         <br />
-        <input type="text" id="nomQuizz" name="nomQuizz" required>
+        <select name="nomQuizz" id="nomQuizz">
+            <option value="">--Selectionnez un Quizz--</option>
+            @foreach (var quizz in listQuizz)
+            {
+                <option value="@quizz.NomQuizz">@quizz.NomQuizz</option>
+            }
+        </select>
+        @*<input type="text" id="nomQuizz" name="nomQuizz" required>*@
         <br /><br />
         <input type="submit" name="Connexion" value="Connexion" />
     </form>
