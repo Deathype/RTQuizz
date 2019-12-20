@@ -2,11 +2,17 @@
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/Quizz").build();
 
-//connection.start().then(function () {
-//    document.getElementById("sendButton").disabled = false;
-//}).catch(function (err) {
-//    return console.error(err.toString());
-//});
+connection.start().then(function () {
+
+    connection.invoke("EnvoieresultatQuestionClasse", Classe, Question).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+
+
+}).catch(function (err) {
+    return console.error(err.toString());
+});
 
 connection.on("ReceiveReponseDetails", function (ListeReponsesServeur) {
    // var Reponse = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
