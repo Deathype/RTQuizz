@@ -26,9 +26,27 @@ namespace RTQuizz.Hubs
         {
             ListeRepDetails.Clear();
          }
-        public Task EnvoieresultatQuestionClasse(Repondre Rep)
+        public Task EnvoieresultatQuestionClasse(string Question,string Classe)
         {
             List<ReponseClasse> ListeRepDetailsTemp = new List<ReponseClasse>();
+                    
+           
+            foreach (ReponseClasse RepTemp in ListeRepDetails)
+            {
+                if (Question == RepTemp.Question && Classe == RepTemp.Classe)
+                {
+                    ListeRepDetailsTemp.Add(RepTemp);
+                }
+            }
+            if (ListeRepDetailsTemp.Count > 0)
+            {
+                string StrTempRepDetails = JsonConvert.SerializeObject(ListeRepDetailsTemp); ;
+                return Clients.All.SendAsync("ReceiveReponseDetails", StrTempRepDetails);
+            }
+            return null;
+        }
+        public void AjoutResultat (Repondre Rep)
+        {
 
             ReponseClasse RepClasseTemp = new ReponseClasse();
             RepClasseTemp.Question = Rep.Reponses.Question.NomQuestion;
@@ -38,7 +56,7 @@ namespace RTQuizz.Hubs
             RepClasseTemp.Juste = Rep.Reponses.BonneReponse;
 
             ReponseClasse matche = ListeRepDetails.Find(x => x.Nom.Contains(RepClasseTemp.Nom) && x.Classe.Contains(RepClasseTemp.Classe) && x.Question.Contains(RepClasseTemp.Question));
-
+          
             if (matche != null)
             {
                 matche = RepClasseTemp;
@@ -47,24 +65,9 @@ namespace RTQuizz.Hubs
             {
                 ListeRepDetails.Add(RepClasseTemp);
             }
+           
 
-            ListeRepDetailsTemp.Clear();
-            foreach (ReponseClasse RepTemp in ListeRepDetails)
-            {
-                if (RepClasseTemp.Question == RepTemp.Question)
-                {
-                    ListeRepDetailsTemp.Add(RepTemp);
-                }
-            }
-
-            if (ListeRepDetailsTemp.Count > 0)
-            {
-                string StrTempRepDetails = JsonConvert.SerializeObject(ListeRepDetailsTemp); ;
-                return Clients.All.SendAsync("ReceiveReponseDetails", StrTempRepDetails);
-            }
-            return null;
         }
-
 
 
         //#endregion

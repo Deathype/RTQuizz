@@ -39,7 +39,11 @@ namespace RTQuizz.Controllers
             testrep.Reponses.NomReponse = "eededf";
             testrep.Reponses.BonneReponse = true;
 
-             QuizzHub.Instance.EnvoieresultatQuestionClasse(testrep);
+
+            QuizzHub.Instance.AjoutResultat(testrep);
+
+            ViewBag.Classe = testrep.Stagiaire.Classe.NomClasse;
+            ViewBag.Question= testrep.Question.NomQuestion;
 
             return View("~/Views/Quizz/ResultQuestion.cshtml");
         }
