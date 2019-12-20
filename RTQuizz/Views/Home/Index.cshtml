@@ -32,4 +32,4 @@
     </form>
 </div>
 
-@if (message != "") { <div class="text-center" style="color:red;font-weight:bold;margin:10px;font-size:18px;font-family:cursive;">@message</div> }
+@if ( !string.IsNullOrEmpty(message)) { <div class="text-center" style="color:red;font-weight:bold;margin:10px;font-size:18px;font-family:cursive;">@message</div> }
