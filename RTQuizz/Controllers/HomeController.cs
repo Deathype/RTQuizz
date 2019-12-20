@@ -75,7 +75,10 @@ namespace RTQuizz.Controllers
                 // Creation du stagiaire et ajout au quizz
                 view = "~/Views/Quizz/AfficheQuestion.cshtml";
             }
-            _dbQuizz.QuizzStagiaire.Add(new QuizzStagiaire(quizz, stagiaire));
+            if(!_dbQuizz.QuizzStagiaire.Any(qs => qs.Stagiaire == stagiaire && qs.Quizz == quizz)){
+                _dbQuizz.QuizzStagiaire.Add(new QuizzStagiaire(quizz, stagiaire));
+            }
+            
             
             // Stagiaire
             ViewBag.Stagiaire = stagiaire;
