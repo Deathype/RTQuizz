@@ -10,6 +10,15 @@ namespace RTQuizz.Controllers
 {
     public class QuizzController : Controller
     {
+        private DbRTContext _dbQuizz;
+
+        public QuizzController(DbRTContext dbQuizz)
+        {
+            _logger = logger;
+            this._dbQuizz = dbQuizz;
+
+        }
+
         public IActionResult Index()
         {
             return View();
