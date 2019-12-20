@@ -4,10 +4,15 @@
     var Reponses = @ViewBag.Reponses;
     var Stagiaire = @ViewBag.Stagiaire;
 }
-<div>
-    <p>@Quizz.NomQuizz</p>
+<div class="float-right text-center">
+    <img src="~/images/user.png" height="50" />
+    <p>@Stagiaire.NomStagiaire</p>
 </div>
-<div class="text-center">
+<div>
+    <p style="font-size:15px;">@Quizz.NomQuizz</p>
+</div>
+
+<div class="text-center" style="margin-top:20px;">
     <h1 class="display-4">@Question.NomQuestion</h1>
 </div>
 
