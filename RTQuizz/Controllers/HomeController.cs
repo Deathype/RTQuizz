@@ -37,8 +37,9 @@ namespace RTQuizz.Controllers
             String message = "";
             String view;
 
-            Formateur forma = new Formateur();
-            forma.Id = 1;
+            Formateur forma = _dbQuizz.Formateurs.First();
+            Classe classe = _dbQuizz.Classe.First();
+
             ViewBag.Formateur = forma;
 
             Quizz quizz = _dbQuizz.Quizz.Include(q => q.Questions).ThenInclude(q => q.ListReponses).SingleOrDefault(n => n.NomQuizz == nomQuizz);
@@ -50,7 +51,7 @@ namespace RTQuizz.Controllers
                 return View("index");
             }
 
-            Stagiaire stagiaire = _dbQuizz.Stagiaire.SingleOrDefault(n => n.NomStagiaire == nomUser && n.Classe.Id == 1);
+            Stagiaire stagiaire = _dbQuizz.Stagiaire.SingleOrDefault(n => n.NomStagiaire == nomUser && n.Classe == classe);
             
             if (stagiaire != null)
             {
@@ -62,7 +63,7 @@ namespace RTQuizz.Controllers
             {
                 stagiaire = new Stagiaire();
                 stagiaire.NomStagiaire = nomUser;
-                stagiaire.Classe.Id = 1;
+                stagiaire.Classe = classe;
                 _dbQuizz.Stagiaire.Add(stagiaire);
                 _dbQuizz.SaveChanges();
 
