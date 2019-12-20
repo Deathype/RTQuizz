@@ -16,12 +16,12 @@ namespace DataAccessLayer
         public DbSet<Reponses> Reponses { get; set; }
         public DbSet<Stagiaire> Stagiaire { get; set; }
         public DbSet<Classe> Classe { get; set; }
-        public DbSet<QuizzQuestion> QuizzQuestion { get; set; }
+       // public DbSet<QuizzQuestion> QuizzQuestion { get; set; }
         public DbSet<QuizzStagiaire> QuizzStagiaire { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<QuizzQuestion>().HasKey(sc => new { sc.QuizzId, sc.QuestionId });
+         //   modelBuilder.Entity<QuizzQuestion>().HasKey(sc => new { sc.QuizzId, sc.QuestionId });
             modelBuilder.Entity<QuizzStagiaire>().HasKey(sc => new { sc.QuizzId, sc.StagiaireId });
             modelBuilder.Entity<Repondre>().HasKey(sc => new { sc.StagiaireId, sc.ReponsesId, sc.QuestionId });
 
@@ -66,20 +66,14 @@ namespace DataAccessLayer
             return quizzStagiaire;
         }
 
-        public Question AddQuestion(string nomQuestion)
+        public Question AddQuestion(Quizz quizz,string nomQuestion)
         {
-            var question = new Question(nomQuestion);
+            var question = new Question(quizz,nomQuestion);
             Question.Add(question);
             return question;
         }
 
-        public QuizzQuestion AddQuizzQuestion(Quizz quizz, Question question)
-        {
-            var quizzQuestion = new QuizzQuestion(quizz, question);
-            QuizzQuestion.Add(quizzQuestion);
-            return quizzQuestion;
-        }
-
+     
         public Reponses AddReponses(string nomReponse, bool bonneReponse, Question question)
         {
             var reponses = new Reponses(nomReponse, bonneReponse, question);
@@ -104,7 +98,6 @@ namespace DataAccessLayer
         {
             DeleteAllData<Repondre>(Repondre);
             DeleteAllData<Reponses>(Reponses);
-            DeleteAllData<QuizzQuestion>(QuizzQuestion);
             DeleteAllData<Question>(Question);
             DeleteAllData<QuizzStagiaire>(QuizzStagiaire);
             DeleteAllData<Quizz>(Quizz);
@@ -140,7 +133,7 @@ namespace DataAccessLayer
             var quizz1 = AddQuizz("Découvrir C#", "C#", formateur);
             var quizzLinq = AddQuizz("Linq", "C#", formateur);
 
-            SaveChanges();
+            
             // Association QuizzStagiaire
             AddQuizzStagiaire(quizz1, stagiaireMarouen);
             AddQuizzStagiaire(quizz1, stagiaireGuillaume);
@@ -158,37 +151,23 @@ namespace DataAccessLayer
             AddQuizzStagiaire(quizzLinq, stagiaireTiffaine);
             AddQuizzStagiaire(quizzLinq, stagiaireNicolas);
 
-            SaveChanges();
+          
 
             // Ajout de questions
-            var q1 = AddQuestion("Quelle est l'outil responsable de mapping objet en C#");
+            var q1 = AddQuestion(quizz1,"Quelle est l'outil responsable de mapping objet en C#");
 
-            var qLinq1 = AddQuestion("Linq q1");
-            var qLinq2 = AddQuestion("Linq q2");
-            var qLinq3 = AddQuestion("Linq q3");
-            var qLinq4 = AddQuestion("Linq q4");
-            var qLinq5 = AddQuestion("Linq q5");
-            var qLinq6 = AddQuestion("Linq q6");
-            var qLinq7 = AddQuestion("Linq q7");
-            var qLinq8 = AddQuestion("Linq q8");
-            var qLinq9 = AddQuestion("Linq q9");
-            var qLinq10 = AddQuestion("Linq q10");
+            var qLinq1 = AddQuestion(quizzLinq,"Linq q1");
+            var qLinq2 = AddQuestion(quizzLinq, "Linq q2");
+            var qLinq3 = AddQuestion(quizzLinq, "Linq q3");
+            var qLinq4 = AddQuestion(quizzLinq, "Linq q4");
+            var qLinq5 = AddQuestion(quizzLinq, "Linq q5");
+            var qLinq6 = AddQuestion(quizzLinq, "Linq q6");
+            var qLinq7 = AddQuestion(quizzLinq, "Linq q7");
+            var qLinq8 = AddQuestion(quizzLinq, "Linq q8");
+            var qLinq9 = AddQuestion(quizzLinq, "Linq q9");
+            var qLinq10 = AddQuestion(quizzLinq, "Linq q10");
 
-            SaveChanges();
-            // Association Quizz et questions
-            AddQuizzQuestion(quizz1, q1);
-            AddQuizzQuestion(quizzLinq, qLinq1);
-            AddQuizzQuestion(quizzLinq, qLinq2);
-            AddQuizzQuestion(quizzLinq, qLinq3);
-            AddQuizzQuestion(quizzLinq, qLinq4);
-            AddQuizzQuestion(quizzLinq, qLinq5);
-            AddQuizzQuestion(quizzLinq, qLinq6);
-            AddQuizzQuestion(quizzLinq, qLinq7);
-            AddQuizzQuestion(quizzLinq, qLinq8);
-            AddQuizzQuestion(quizzLinq, qLinq9);
-            AddQuizzQuestion(quizzLinq, qLinq10);
 
-            SaveChanges();
             // Ajout de réponses
             var repQ1 = AddReponses("Entity framework", true, q1);
 
