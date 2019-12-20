@@ -50,11 +50,19 @@ namespace RTQuizz.Controllers
 
             if (quizz == null)
             {
+                ViewBag.listQuizz = _dbQuizz.Quizz.ToList();
                 message = "Le Quizz n'existe pas, impossible d'y accéder";
                 ViewBag.message = message;
                 return View("index");
             }
-
+            // Questions
+            if (quizz.Questions.Count() == 0)
+            {
+                ViewBag.listQuizz = _dbQuizz.Quizz.ToList();
+                message = "Le Quizz ne comporte aucunes questions, impossible de jouer ☺";
+                ViewBag.message = message;
+                return View("index");
+            }
             // Recupération du stagiaire dans la base
             Stagiaire stagiaire = _dbQuizz.Stagiaire.SingleOrDefault(n => n.NomStagiaire == nomUser && n.Classe == classe);
             
@@ -85,24 +93,19 @@ namespace RTQuizz.Controllers
             // Quizz
             ViewBag.Quizz = quizz;
 
-            // Questions
-            if(quizz.Questions.Count() == 0)
-            {
-                message = "Le Quizz ne comporte aucunes questions, impossible de jouer ☺";
-                ViewBag.message = message;
-                return View("index");
-            }
+          
             ViewBag.Question = quizz.Questions.First();
             
             // Reponses 
             var reponses = quizz.Questions.First().ListReponses;
             if (reponses == null)
             {
+                ViewBag.listQuizz = _dbQuizz.Quizz.ToList();
                 return View("Index");
             }
             ViewBag.Reponses = reponses;
-            
-            
+
+            ViewBag.listQuizz = _dbQuizz.Quizz.ToList();
             return View(view);
         }
 

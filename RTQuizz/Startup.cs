@@ -6,6 +6,7 @@ using DataAccessLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,8 @@ namespace RTQuizz
             services.AddSingleton(typeof(DbRTContext));
             services.AddControllersWithViews();
             services.AddSignalR();
+
+            services.AddSingleton(typeof(QuizzHub));
 
             services.AddDbContext<DbRTContext>();
         
@@ -64,8 +67,13 @@ namespace RTQuizz
                 endpoints.MapHub<QuizzHub>("/Quizz");
                
             });
+            //app.Use(async (context, next) =>
+            //{
+            //    var hubContext = context.RequestServices
+            //                            .GetRequiredService<IHubContext<QuizzHub>>();
+            //    //...
+            //});
 
-     
         }
     }
 }

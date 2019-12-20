@@ -4,11 +4,9 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/Quizz").build();
 
 connection.start().then(function () {
 
-    connection.invoke("EnvoieresultatQuestionClasse", Classe, Question).catch(function (err) {
+    connection.invoke("EnvoieResultat").catch(function (err) {
         return console.error(err.toString());
     });
-
-
 
 }).catch(function (err) {
     return console.error(err.toString());
@@ -21,36 +19,47 @@ connection.on("ReceiveReponseDetails", function (ListeReponsesServeur) {
     //var args = Array.prototype.slice.call(ListeReponses);
     ////// Avec ECMAScript 2015 / ES6
     ////var args = Array.from(arguments);
+
+    console.log("Rentrer dans rep");
+    console.log(ListeReponsesServeur);
     var ListeRep = [];
 
     ListeRep = JSON.parse(ListeReponsesServeur);
     //for (var i = 0; i < args.length; i+=3) {
     //    var LRS = { Nom:, Reponse:,Juste:}
     //}
-       
+
+
+
+    console.log(ListeRep);
+
     var Ancientbody = document.getElementById('TbodyRow');
     var new_tbody = document.createElement('tbody');
     new_tbody.setAttribute("id", "TbodyRow");
 
+
+    console.log(Ancientbody);
+
     //TbodyRow
-    for(var RepT in ListeRep){
+    //for(var RepT in ListeRep){
 
-    var tr = document.createElement("tr");
-    var tdNom = document.createElement("tr");
-    var tdReponse = document.createElement("tr");
-    var tdJuste = document.createElement("tr");
+    ListeRep.forEach(RepT => {
+        var tr = document.createElement("tr");
+        var tdNom = document.createElement("td");
+        var tdReponse = document.createElement("td");
+        var tdJuste = document.createElement("td");
 
-    tdNom.textContent = RepT.Nom;
-    tdReponse.textContent = RepT.Reponse;
-    tdJuste.textContent = RepT.Juste;
+        tdNom.textContent = RepT.Nom;
+        tdReponse.textContent = RepT.Reponse;
+        tdJuste.textContent = RepT.Juste;
 
-    tr.appendChild(tdNom);
-    tr.appendChild(tdReponse);
-    tr.appendChild(tdJuste);
+        tr.appendChild(tdNom);
+        tr.appendChild(tdReponse);
+        tr.appendChild(tdJuste);
 
-    new_tbody.appendChild(tr);
-}
-
+        new_tbody.appendChild(tr);
+    } );
+    console.log(new_tbody);
 Ancientbody.parentNode.replaceChild(new_tbody, Ancientbody);
 
 });

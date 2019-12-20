@@ -9,15 +9,15 @@ namespace RTQuizz.Hubs
 {
     public class QuizzHub : Hub
     {
-        private static QuizzHub _Instance;
-        public static QuizzHub Instance { get { return _Instance; } }
+        //private static QuizzHub _Instance = new QuizzHub();
+        //public static QuizzHub Instance { get { return _Instance; } }
 
         public List<ReponseClasse> ListeRepDetails = new List<ReponseClasse>();
-        
+
+
         public QuizzHub()
         {
-            _Instance = this;
-          
+
         }
        
         #region "Fonction perso"
@@ -26,11 +26,10 @@ namespace RTQuizz.Hubs
         {
             ListeRepDetails.Clear();
          }
-        public Task EnvoieresultatQuestionClasse(string Question,string Classe)
+        public async Task EnvoieresultatQuestionClasse(string Classe,string Question)
         {
             List<ReponseClasse> ListeRepDetailsTemp = new List<ReponseClasse>();
-                    
-           
+                               
             foreach (ReponseClasse RepTemp in ListeRepDetails)
             {
                 if (Question == RepTemp.Question && Classe == RepTemp.Classe)
@@ -41,9 +40,17 @@ namespace RTQuizz.Hubs
             if (ListeRepDetailsTemp.Count > 0)
             {
                 string StrTempRepDetails = JsonConvert.SerializeObject(ListeRepDetailsTemp); ;
-                return Clients.All.SendAsync("ReceiveReponseDetails", StrTempRepDetails);
+                 await Clients.All.SendAsync("ReceiveReponseDetails", StrTempRepDetails);
             }
-            return null;
+            
+        }
+        public string ClasseCourante { get; set; }
+        public string QuestionCourante { get; set; }
+        public async Task EnvoieResultat()
+        {
+                       
+          await EnvoieresultatQuestionClasse(ClasseCourante, QuestionCourante);
+
         }
         public void AjoutResultat (Repondre Rep)
         {
@@ -56,14 +63,19 @@ namespace RTQuizz.Hubs
             RepClasseTemp.Juste = Rep.Reponses.BonneReponse;
 
             ReponseClasse matche = ListeRepDetails.Find(x => x.Nom.Contains(RepClasseTemp.Nom) && x.Classe.Contains(RepClasseTemp.Classe) && x.Question.Contains(RepClasseTemp.Question));
-          
+
+            ClasseCourante = RepClasseTemp.Classe;
+            QuestionCourante = RepClasseTemp.Question;
+
             if (matche != null)
             {
+               
                 matche = RepClasseTemp;
             }
             else
             {
                 ListeRepDetails.Add(RepClasseTemp);
+            
             }
            
 
