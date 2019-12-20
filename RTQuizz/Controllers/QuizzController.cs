@@ -51,7 +51,9 @@ namespace RTQuizz.Controllers
             _QuizzHub.AjoutResultat(testrep);
 
             ViewBag.Classe = testrep.Stagiaire.Classe.NomClasse;
-            ViewBag.Question = testrep.Question.NomQuestion;
+            ViewBag.Question = testrep.Question;
+            ViewBag.Stagiaire = testrep.Stagiaire;
+            ViewBag.Quizz = _dbQuizz.Quizz.Single(q => q.Id == quizzId);
 
             return View("~/Views/Quizz/ResultQuestion.cshtml");
         }

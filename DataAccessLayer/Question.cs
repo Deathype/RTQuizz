@@ -14,8 +14,7 @@ namespace DataAccessLayer
 
         public Quizz Quizz { get; set; }
 
-
-       
+        public int NumQuestion { get; set; }
 
         //public Reponses RealReponse { get; set; }
 
@@ -24,11 +23,11 @@ namespace DataAccessLayer
 
         }
 
-        public Question(Quizz quizz,string nomQuestion)
+        public Question(Quizz quizz,string nomQuestion, int numQuestion)
         {
             Quizz = quizz;
             NomQuestion = nomQuestion;
-
+            NumQuestion = numQuestion;
         }
     }
 

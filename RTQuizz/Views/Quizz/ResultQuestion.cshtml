@@ -1,18 +1,29 @@
 ﻿@{
-    ViewData["Title"] = "Quizz Page";
+    var Quizz = @ViewBag.Quizz;
+    var Question = @ViewBag.Question;
+    var Reponses = @ViewBag.Reponses;
+    var Stagiaire = @ViewBag.Stagiaire;
 
+    int numQuestion = Question.NumQuestion + 1;
 }
-@*<h1>@ViewBag.Formateur.idFormateur</h1>*@
-
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/ResultQuestion.js"></script>
 
+<div class="float-right text-center">
+    <img src="~/images/user.png" height="50" />
+    <p>@Stagiaire.NomStagiaire</p>
+</div>
+<div>
+    <p style="font-size:15px;">@Quizz.NomQuizz</p>
+</div>
 <div class="text-center">
-    <h1 class="display-4">Resultats</h1>
+    <h1 class="display-4">Resultats : </h1>
+    <br/>
+    <h1 class="display-4">@Question.NomQuestion</h1>
+    <br/>
 </div>
 
 <br />
-<hr />
 <hr />
 <br />
 
@@ -29,5 +40,17 @@
         </tbody>
     </table>
 </div>
-@************************************************************@
+
+<br/>
+
+
+<div class="text-center">
+    <form method="POST" action="@Url.Action("RunQuizz", "Home")">
+        <input id="nomUser" name="nomUser" type="hidden" value="@Stagiaire.NomStagiaire">
+        <input id="nomQuizz" name="nomQuizz" type="hidden" value="@Quizz.NomQuizz">
+        <input id="numQuestion" name="numQuestion" type="hidden" value="@numQuestion">
+        <button type="submit" class="btn btn-outline-secondary" name="continuer">Question suivante -></button>
+    </form>
+    @*<button class="btn btn-outline-secondary" name="continuer"><a href="@Url.Action("RunQuizz", "Quizz", @result)">Question suivante -></a></button>*@
+</div>
 

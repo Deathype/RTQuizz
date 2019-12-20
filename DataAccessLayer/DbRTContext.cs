@@ -66,9 +66,9 @@ namespace DataAccessLayer
             return quizzStagiaire;
         }
 
-        public Question AddQuestion(Quizz quizz,string nomQuestion)
+        public Question AddQuestion(Quizz quizz,string nomQuestion, int numQuestion)
         {
-            var question = new Question(quizz,nomQuestion);
+            var question = new Question(quizz,nomQuestion, numQuestion);
             Question.Add(question);
             return question;
         }
@@ -151,18 +151,18 @@ namespace DataAccessLayer
             AddQuizzStagiaire(quizzLinq, stagiaireNicolas);
 
             // Ajout de questions
-            var q1 = AddQuestion(quizz1,"Quelle est l'outil responsable de mapping objet en C#");
+            var q1 = AddQuestion(quizz1,"Quelle est l'outil responsable de mapping objet en C#", 0);
 
-            var qLinq1 = AddQuestion(quizzLinq,"Linq q1");
-            var qLinq2 = AddQuestion(quizzLinq, "Linq q2");
-            var qLinq3 = AddQuestion(quizzLinq, "Linq q3");
-            var qLinq4 = AddQuestion(quizzLinq, "Linq q4");
-            var qLinq5 = AddQuestion(quizzLinq, "Linq q5");
-            var qLinq6 = AddQuestion(quizzLinq, "Linq q6");
-            var qLinq7 = AddQuestion(quizzLinq, "Linq q7");
-            var qLinq8 = AddQuestion(quizzLinq, "Linq q8");
-            var qLinq9 = AddQuestion(quizzLinq, "Linq q9");
-            var qLinq10 = AddQuestion(quizzLinq, "Linq q10");
+            var qLinq1 = AddQuestion(quizzLinq,"Linq q1",0);
+            var qLinq2 = AddQuestion(quizzLinq, "Linq q2",1);
+            var qLinq3 = AddQuestion(quizzLinq, "Linq q3",2);
+            var qLinq4 = AddQuestion(quizzLinq, "Linq q4",3);
+            var qLinq5 = AddQuestion(quizzLinq, "Linq q5",4);
+            var qLinq6 = AddQuestion(quizzLinq, "Linq q6",5);
+            var qLinq7 = AddQuestion(quizzLinq, "Linq q7",6);
+            var qLinq8 = AddQuestion(quizzLinq, "Linq q8",7);
+            var qLinq9 = AddQuestion(quizzLinq, "Linq q9",8);
+            var qLinq10 = AddQuestion(quizzLinq, "Linq q10",9);
 
             // Ajout de réponses
             var repQ1 = AddReponses("Entity framework", true, q1);

@@ -69,3 +69,21 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+#tableRep {
+    width: 100%;
+
+}
+
+#tableRep th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.resRepV {
+    height: 30px;
+}
+.resRepF {
+    height: 20px;
+}

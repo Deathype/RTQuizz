@@ -35,10 +35,11 @@ namespace RTQuizz.Controllers
         }
 
         [HttpPost]
-        public ActionResult RunQuizz(String nomUser, String nomQuizz)
+        public ActionResult RunQuizz(String nomUser, String nomQuizz, int numQuestion)
         {
             String message = "";
             String view;
+
 
             //Formateur forma = _dbQuizz.Formateurs.First();
             Classe classe = _dbQuizz.Classe.First();
@@ -63,6 +64,8 @@ namespace RTQuizz.Controllers
                 ViewBag.message = message;
                 return View("index");
             }
+            
+
             // Recupération du stagiaire dans la base
             Stagiaire stagiaire = _dbQuizz.Stagiaire.SingleOrDefault(n => n.NomStagiaire == nomUser && n.Classe == classe);
             
@@ -93,11 +96,19 @@ namespace RTQuizz.Controllers
             // Quizz
             ViewBag.Quizz = quizz;
 
-          
-            ViewBag.Question = quizz.Questions.First();
+            var question = quizz.Questions.SingleOrDefault(q => q.NumQuestion == numQuestion);
+            if(question == null)
+            {
+                ViewBag.listQuizz = _dbQuizz.Quizz.ToList();
+                message = "Bravo ! Quizz terminé ! :)";
+                ViewBag.message = message;
+                return View("index");
+            }
+            
+            ViewBag.Question = question;
             
             // Reponses 
-            var reponses = quizz.Questions.First().ListReponses;
+            var reponses = question.ListReponses;
             if (reponses == null)
             {
                 ViewBag.listQuizz = _dbQuizz.Quizz.ToList();

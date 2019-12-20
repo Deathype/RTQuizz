@@ -51,10 +51,21 @@ connection.on("ReceiveReponseDetails", function (ListeReponsesServeur) {
 
         tdNom.textContent = RepT.Nom;
         tdReponse.textContent = RepT.Reponse;
-        tdJuste.textContent = RepT.Juste;
+        //tdJuste.textContent = RepT.Juste;
 
         tr.appendChild(tdNom);
         tr.appendChild(tdReponse);
+
+        var img = document.createElement("img");
+        if (RepT.Juste) {
+            img.src = "../images/validation.png";
+            img.classList.add("resRepV");
+        } else {
+            img.src = "../images/redcross.png";
+            img.classList.add("resRepF");
+        }
+        img.classList.add("resRep");
+        tdJuste.appendChild(img);
         tr.appendChild(tdJuste);
 
         new_tbody.appendChild(tr);
