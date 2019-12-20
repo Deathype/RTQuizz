@@ -18,5 +18,16 @@ namespace DataAccessLayer
 
         public String ProfMatiere { get; set; }
 
+        public Formateur()
+        {
+
+        }
+
+        public Formateur(string nom, string prenom, string profMatiere)
+        {
+            Nom = nom;
+            Prenom = prenom;
+            ProfMatiere = profMatiere;
+        }
     }
 }

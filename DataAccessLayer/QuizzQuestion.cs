@@ -8,14 +8,13 @@ namespace DataAccessLayer
     {
         public int QuizzId { get; set; }
         public Quizz Quizz { get; set; }
-
         public int QuestionId { get; set; }
         public Question Question { get; set; }
 
-        public QuizzQuestion(Quizz Quizz, Question question)
+        public QuizzQuestion(Quizz quizz, Question question)
         {
-            this.Quizz = Quizz;
-            this.Question = Question;
+            this.Quizz = quizz;
+            this.Question = question;
         }
 
         public QuizzQuestion() { }

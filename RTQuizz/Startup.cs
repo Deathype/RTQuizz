@@ -38,7 +38,7 @@ namespace RTQuizz
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DbRTContext context)
         {
             context.Database.Migrate();
-            context.initData();
+            context.InitData();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

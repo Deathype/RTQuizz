@@ -8,11 +8,21 @@ namespace DataAccessLayer
 {
     public class Reponses
     {
-      
         public int Id { get; set; }
         public String NomReponse { get; set; }
-        public Boolean BonneReponse { get; set; }
+        public bool BonneReponse { get; set; }
         public Question Question { get; set; }
-   
+
+        public Reponses()
+        {
+
+        }
+
+        public Reponses(string nomReponse, bool bonneReponse, Question question)
+        {
+            NomReponse = nomReponse;
+            BonneReponse = bonneReponse;
+            Question = question;
+        }
     }
 }
