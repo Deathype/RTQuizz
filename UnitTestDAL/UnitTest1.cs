@@ -23,15 +23,14 @@ namespace UnitTestDAL
             Assert.IsTrue(dbRTContext.Quizz.ToList().Count>= 0);
             Assert.IsTrue(dbRTContext.Formateurs.ToList().Count >= 0); 
             Assert.IsTrue(dbRTContext.Question.ToList().Count >= 0);
-          //  Assert.IsTrue(dbRTContext.Composer.ToList().Count > 0);
+          
             Assert.IsTrue(dbRTContext.Repondre.ToList().Count >= 0);
             Assert.IsTrue(dbRTContext.Reponses.ToList().Count >= 0);
             Assert.IsTrue(dbRTContext.Stagiaire.ToList().Count >= 0);
             Assert.IsTrue(dbRTContext.Classe.ToList().Count >= 0);
             Assert.IsTrue(dbRTContext.QuizzStagiaire.ToList().Count >= 0);
-            Assert.IsTrue(dbRTContext.QuizzQuestion.ToList().Count >= 0);
-
-            //Assert.IsTrue(dbRTContext.Participe.ToList().Count > 0);
+            
+           
 
 
 

@@ -28,6 +28,9 @@ namespace RTQuizz.Controllers
 
         public IActionResult Index()
         {
+            List<Quizz> listQuizz = _dbQuizz.Quizz.ToList();
+
+            ViewBag.listQuizz = listQuizz;
             return View();
         }
 
@@ -37,11 +40,12 @@ namespace RTQuizz.Controllers
             String message = "";
             String view;
 
-            Formateur forma = _dbQuizz.Formateurs.First();
+            //Formateur forma = _dbQuizz.Formateurs.First();
             Classe classe = _dbQuizz.Classe.First();
 
-            ViewBag.Formateur = forma;
+            //ViewBag.Formateur = forma;
 
+            // Récupération du Quizz dans la base
             Quizz quizz = _dbQuizz.Quizz.Include(q => q.Questions).ThenInclude(q => q.ListReponses).SingleOrDefault(n => n.NomQuizz == nomQuizz);
 
             if (quizz == null)
@@ -51,6 +55,7 @@ namespace RTQuizz.Controllers
                 return View("index");
             }
 
+            // Recupération du stagiaire dans la base
             Stagiaire stagiaire = _dbQuizz.Stagiaire.SingleOrDefault(n => n.NomStagiaire == nomUser && n.Classe == classe);
             
             if (stagiaire != null)
@@ -72,8 +77,12 @@ namespace RTQuizz.Controllers
             }
             _dbQuizz.QuizzStagiaire.Add(new QuizzStagiaire(quizz, stagiaire));
             
+            // Stagiaire
             ViewBag.Stagiaire = stagiaire;
+            // Quizz
             ViewBag.Quizz = quizz;
+
+            // Questions
             if(quizz.Questions.Count() == 0)
             {
                 message = "Le Quizz ne comporte aucunes questions, impossible de jouer ☺";
@@ -81,12 +90,16 @@ namespace RTQuizz.Controllers
                 return View("index");
             }
             ViewBag.Question = quizz.Questions.First();
+            
+            // Reponses 
             var reponses = quizz.Questions.First().ListReponses;
             if (reponses == null)
             {
                 return View("Index");
             }
             ViewBag.Reponses = reponses;
+            
+            
             return View(view);
         }
 

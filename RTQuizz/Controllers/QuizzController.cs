@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using DataAccessLayer;
 using RTQuizz.Hubs;
@@ -10,6 +11,16 @@ namespace RTQuizz.Controllers
 {
     public class QuizzController : Controller
     {
+        private readonly ILogger<QuizzController> _logger;
+        private DbRTContext _dbQuizz;
+
+        public QuizzController(ILogger<QuizzController> logger, DbRTContext dbQuizz)
+        {
+            _logger = logger;
+            this._dbQuizz = dbQuizz;
+
+        }
+
         public IActionResult Index()
         {
             return View();

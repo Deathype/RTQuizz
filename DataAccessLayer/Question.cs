@@ -11,7 +11,12 @@ namespace DataAccessLayer
         public int Id { get; set; }
         public String NomQuestion { get; set; }
         public IList<Reponses> ListReponses { get; set; }
-        public IList<QuizzQuestion> QuizzQuestion { get; set; }
+
+        public Quizz Quizz { get; set; }
+
+
+       
+
         //public Reponses RealReponse { get; set; }
 
         public Question()
@@ -19,9 +24,11 @@ namespace DataAccessLayer
 
         }
 
-        public Question(string nomQuestion)
+        public Question(Quizz quizz,string nomQuestion)
         {
+            Quizz = quizz;
             NomQuestion = nomQuestion;
+
         }
     }
 
