@@ -30,11 +30,8 @@ namespace RTQuizz
             services.AddSingleton(typeof(DbRTContext));
             services.AddControllersWithViews();
             services.AddSignalR();
-
             services.AddSingleton(typeof(QuizzHub));
-
             services.AddDbContext<DbRTContext>();
-        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,9 +51,7 @@ namespace RTQuizz
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -67,13 +62,6 @@ namespace RTQuizz
                 endpoints.MapHub<QuizzHub>("/Quizz");
                
             });
-            //app.Use(async (context, next) =>
-            //{
-            //    var hubContext = context.RequestServices
-            //                            .GetRequiredService<IHubContext<QuizzHub>>();
-            //    //...
-            //});
-
         }
     }
 }

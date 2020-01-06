@@ -16,7 +16,6 @@ namespace DataAccessLayer
         public DbSet<Reponses> Reponses { get; set; }
         public DbSet<Stagiaire> Stagiaire { get; set; }
         public DbSet<Classe> Classe { get; set; }
-       // public DbSet<QuizzQuestion> QuizzQuestion { get; set; }
         public DbSet<QuizzStagiaire> QuizzStagiaire { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
