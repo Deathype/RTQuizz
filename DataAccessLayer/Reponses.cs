@@ -9,7 +9,7 @@ namespace DataAccessLayer
     public class Reponses
     {
         public int Id { get; set; }
-        public String NomReponse { get; set; }
+        public string NomReponse { get; set; }
         public bool BonneReponse { get; set; }
         public Question Question { get; set; }
 

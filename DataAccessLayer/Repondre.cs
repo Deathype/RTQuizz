@@ -12,7 +12,6 @@ namespace DataAccessLayer
         public Question Question { get; set; }
         public Reponses Reponses { get; set; }
         public string RepStagiaire { get; set; }
-
         public int StagiaireId { get; set; }
         public int QuestionId { get; set; }
         public int ReponsesId { get; set; }

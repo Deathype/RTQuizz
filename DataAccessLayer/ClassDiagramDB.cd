@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DataAccessLayer.Classe">
+    <Position X="1" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhA=</HashCode>
+      <FileName>Classe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccessLayer.Question">
+    <Position X="7" Y="3" Width="1.5" />
+    <AssociationLine Name="ListReponses" Type="DataAccessLayer.Reponses" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.5" Y="3.5" />
+        <Point X="9.5" Y="3.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Quizz" Type="DataAccessLayer.Quizz" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7" Y="3.562" />
+        <Point X="2.719" Y="3.562" />
+        <Point X="2.719" Y="3.042" />
+        <Point X="2.375" Y="3.042" />
+        <Point X="2.375" Y="2.632" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAEAAIA=</HashCode>
+      <FileName>Question.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Quizz" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="ListReponses" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="DataAccessLayer.Quizz">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <AssociationLine Name="Questions" Type="DataAccessLayer.Question" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.5" Y="2.438" />
+        <Point X="3.385" Y="2.438" />
+        <Point X="3.385" Y="3.188" />
+        <Point X="7" Y="3.188" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAQAAAAAAAAAAAAAQgAAAAAAAAAAGAAAAAAAAAAA=</HashCode>
+      <FileName>Quizz.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Formateur" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Questions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="DataAccessLayer.QuizzStagiaire">
+    <Position X="1" Y="3.25" Width="1.5" />
+    <AssociationLine Name="Quizz" Type="DataAccessLayer.Quizz" FixedToPoint="true">
+      <Path>
+        <Point X="1.438" Y="3.25" />
+        <Point X="1.438" Y="2.632" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAIAAAAAAAAAAAAAAAAAAAEEAAA=</HashCode>
+      <FileName>QuizzStagiaire.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Quizz" />
+      <Property Name="Stagiaire" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DataAccessLayer.Repondre">
+    <Position X="9.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAIAAAAEAAAAAAQEAAAAAAQEAAA=</HashCode>
+      <FileName>Repondre.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Question" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DataAccessLayer.Reponses">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAABAAAAAAAEAAAAQAAAAAA=</HashCode>
+      <FileName>Reponses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccessLayer.Stagiaire">
+    <Position X="4" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIQAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Stagiaire.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Classe" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DataAccessLayer.Formateur">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAAAAAAAAAAAAAAAAACAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Formateur.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -45,7 +45,7 @@ namespace DataAccessLayer
             return classe;
         }
 
-        public Stagiaire AddStagiaire(String nomStagiaire, Classe classe)
+        public Stagiaire AddStagiaire(string nomStagiaire, Classe classe)
         {
             var stagiaire = new Stagiaire(nomStagiaire, classe);
             Stagiaire.Add(stagiaire);

@@ -10,8 +10,8 @@ namespace DataAccessLayer
     public class Quizz
     {
         public int Id { get; set; }
-        public String NomQuizz { get; set; }
-        public String ThemeQuizz { get; set; }
+        public string NomQuizz { get; set; }
+        public string ThemeQuizz { get; set; }
         public Formateur Formateur { get; set; }
         public IList<Question> Questions { get; set; }
         public IList<QuizzStagiaire> QuizzStagiaire { get; set; }

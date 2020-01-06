@@ -9,9 +9,8 @@ namespace DataAccessLayer
     public class Stagiaire
     {
         public int StagiaireId { get; set; }
-        public String NomStagiaire { get; set; }
+        public string NomStagiaire { get; set; }
         public Classe Classe { get; set; }
-     //   public List<Quizz> ListQuizz { get; set; }
         public IList<QuizzStagiaire> QuizzStagiaire { get; set; }
 
         public Stagiaire()
@@ -19,7 +18,7 @@ namespace DataAccessLayer
 
         }
 
-        public Stagiaire(String nomStagiaire, Classe classe)
+        public Stagiaire(string nomStagiaire, Classe classe)
         {
             NomStagiaire = nomStagiaire;
             Classe = classe;

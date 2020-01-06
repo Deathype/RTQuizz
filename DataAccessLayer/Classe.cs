@@ -7,9 +7,8 @@ namespace DataAccessLayer
 {
     public class Classe
     {
-       
         public int Id { get; set; }
-        public String NomClasse { get; set; }
+        public string NomClasse { get; set; }
         public int NombreEleve { get; set; }
 
         public Classe()
@@ -21,7 +20,6 @@ namespace DataAccessLayer
         {
             NomClasse = nomClasse;
             NombreEleve = nombreEleve;
-
         }
     }
 }

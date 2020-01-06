@@ -11,12 +11,9 @@ namespace DataAccessLayer
     {
         
         public int Id { get; set; }
-
-        public String Nom { get; set; }
-
-        public String Prenom { get; set; }
-
-        public String ProfMatiere { get; set; }
+        public string Nom { get; set; }
+        public string Prenom { get; set; }
+        public string ProfMatiere { get; set; }
 
         public Formateur()
         {

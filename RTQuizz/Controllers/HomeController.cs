@@ -35,10 +35,10 @@ namespace RTQuizz.Controllers
         }
 
         [HttpPost]
-        public ActionResult RunQuizz(String nomUser, String nomQuizz, int numQuestion)
+        public ActionResult RunQuizz(string nomUser, string nomQuizz, int numQuestion)
         {
-            String message = "";
-            String view;
+            string message = "";
+            string view;
 
 
             //Formateur forma = _dbQuizz.Formateurs.First();

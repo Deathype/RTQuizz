@@ -9,14 +9,12 @@ namespace DataAccessLayer
     public class Question
     {
         public int Id { get; set; }
-        public String NomQuestion { get; set; }
+        public string NomQuestion { get; set; }
         public IList<Reponses> ListReponses { get; set; }
 
         public Quizz Quizz { get; set; }
 
         public int NumQuestion { get; set; }
-
-        //public Reponses RealReponse { get; set; }
 
         public Question()
         {
@@ -30,7 +28,5 @@ namespace DataAccessLayer
             NumQuestion = numQuestion;
         }
     }
-
-
 }
 
