@@ -26,8 +26,9 @@ namespace RTQuizz.Controllers
         public IActionResult Index()
         {
             List<Quizz> listQuizz = _dbRTContext.Quizz.ToList();
-            ViewBag.listQuizz = listQuizz;
-            return View();
+            var homeIndexViewModel = new HomeIndexViewModel();
+            homeIndexViewModel.QuizzList = listQuizz;
+            return View(homeIndexViewModel);
         }
 
         [HttpPost]
@@ -43,27 +44,26 @@ namespace RTQuizz.Controllers
 
             if (quizz == null)
             {
-                ViewBag.listQuizz = _dbRTContext.Quizz.ToList();
-                message = "Le Quizz n'existe pas, impossible d'y accéder";
-                ViewBag.message = message;
-                return View("Index");
+                var homeIndexViewModel = new HomeIndexViewModel();
+                homeIndexViewModel.Message = "Le Quizz n'existe pas, impossible d'y accéder";
+                homeIndexViewModel.QuizzList = _dbRTContext.Quizz.ToList();
+                return View("Index", homeIndexViewModel);
             }
             // Questions
             if (quizz.Questions.Count() == 0)
             {
-                ViewBag.listQuizz = _dbRTContext.Quizz.ToList();
-                message = "Le Quizz ne comporte aucunes questions, impossible de jouer ☺";
-                ViewBag.message = message;
-                return View("Index");
+                var homeIndexViewModel = new HomeIndexViewModel();
+                homeIndexViewModel.Message = "Le Quizz ne comporte aucunes questions, impossible de jouer ☺";
+                homeIndexViewModel.QuizzList = _dbRTContext.Quizz.ToList();
+                return View("Index", homeIndexViewModel);
             }
-            
 
             // Recupération du stagiaire dans la base
             Stagiaire stagiaire = _dbRTContext.Stagiaire.SingleOrDefault(n => n.NomStagiaire == nomUser && n.Classe == classe);
             
             if (stagiaire != null)
             {
-                
+               
                 // Ajout du stagiaire au quizz
                 view = "~/Views/Quizz/AfficheQuestion.cshtml";
             }
