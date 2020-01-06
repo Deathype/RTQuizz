@@ -12,15 +12,14 @@ namespace RTQuizz.Controllers
     public class QuizzController : Controller
     {
         private readonly ILogger<QuizzController> _logger;
-        private DbRTContext _dbQuizz;
-        private QuizzHub _QuizzHub;
+        private readonly DbRTContext _dbRTContext;
+        private readonly QuizzHub _quizzHub;
 
-        public QuizzController(ILogger<QuizzController> logger, DbRTContext dbQuizz, QuizzHub quizzHub)
+        public QuizzController(ILogger<QuizzController> logger, DbRTContext dbRTContext, QuizzHub quizzHub)
         {
             _logger = logger;
-            this._dbQuizz = dbQuizz;
-            this._QuizzHub = quizzHub;
-
+            _dbRTContext = dbRTContext;
+            _quizzHub = quizzHub;
         }
 
         public IActionResult Index()
@@ -40,24 +39,20 @@ namespace RTQuizz.Controllers
 
             //pour test signalr
             Repondre testrep = new Repondre();
-                              
 
-
-            testrep.Stagiaire = _dbQuizz.Stagiaire.Single(a => a.StagiaireId == stagiaireId);
-            testrep.Question = _dbQuizz.Question.Single(a => a.Id == questionId);
-            testrep.Reponses = _dbQuizz.Reponses.Single(r => r.Id == reponseId);
+            testrep.Stagiaire = _dbRTContext.Stagiaire.Single(a => a.StagiaireId == stagiaireId);
+            testrep.Question = _dbRTContext.Question.Single(a => a.Id == questionId);
+            testrep.Reponses = _dbRTContext.Reponses.Single(r => r.Id == reponseId);
             // testrep.RepStagiaire
 
-            _QuizzHub.AjoutResultat(testrep);
+            _quizzHub.AjoutResultat(testrep);
 
             ViewBag.Classe = testrep.Stagiaire.Classe.NomClasse;
             ViewBag.Question = testrep.Question;
             ViewBag.Stagiaire = testrep.Stagiaire;
-            ViewBag.Quizz = _dbQuizz.Quizz.Single(q => q.Id == quizzId);
+            ViewBag.Quizz = _dbRTContext.Quizz.Single(q => q.Id == quizzId);
 
             return View("~/Views/Quizz/ResultQuestion.cshtml");
         }
-
-
     }
 }

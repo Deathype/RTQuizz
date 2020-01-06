@@ -14,22 +14,18 @@ namespace RTQuizz.Controllers
 {
     public class HomeController : Controller
     {
-        private DbRTContext _dbQuizz;
-
-
+        private readonly DbRTContext _dbRTContext;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, DbRTContext dbQuizz)
+        public HomeController(ILogger<HomeController> logger, DbRTContext dbRTContext)
         {
             _logger = logger;
-            this._dbQuizz = dbQuizz;
-            
+            _dbRTContext = dbRTContext;
         }
 
         public IActionResult Index()
         {
-            List<Quizz> listQuizz = _dbQuizz.Quizz.ToList();
-
+            List<Quizz> listQuizz = _dbRTContext.Quizz.ToList();
             ViewBag.listQuizz = listQuizz;
             return View();
         }
@@ -40,34 +36,30 @@ namespace RTQuizz.Controllers
             string message = "";
             string view;
 
-
-            //Formateur forma = _dbQuizz.Formateurs.First();
-            Classe classe = _dbQuizz.Classe.First();
-
-            //ViewBag.Formateur = forma;
+            Classe classe = _dbRTContext.Classe.First();
 
             // Récupération du Quizz dans la base
-            Quizz quizz = _dbQuizz.Quizz.Include(q => q.Questions).ThenInclude(q => q.ListReponses).SingleOrDefault(n => n.NomQuizz == nomQuizz);
+            Quizz quizz = _dbRTContext.Quizz.Include(q => q.Questions).ThenInclude(q => q.ListReponses).SingleOrDefault(n => n.NomQuizz == nomQuizz);
 
             if (quizz == null)
             {
-                ViewBag.listQuizz = _dbQuizz.Quizz.ToList();
+                ViewBag.listQuizz = _dbRTContext.Quizz.ToList();
                 message = "Le Quizz n'existe pas, impossible d'y accéder";
                 ViewBag.message = message;
-                return View("index");
+                return View("Index");
             }
             // Questions
             if (quizz.Questions.Count() == 0)
             {
-                ViewBag.listQuizz = _dbQuizz.Quizz.ToList();
+                ViewBag.listQuizz = _dbRTContext.Quizz.ToList();
                 message = "Le Quizz ne comporte aucunes questions, impossible de jouer ☺";
                 ViewBag.message = message;
-                return View("index");
+                return View("Index");
             }
             
 
             // Recupération du stagiaire dans la base
-            Stagiaire stagiaire = _dbQuizz.Stagiaire.SingleOrDefault(n => n.NomStagiaire == nomUser && n.Classe == classe);
+            Stagiaire stagiaire = _dbRTContext.Stagiaire.SingleOrDefault(n => n.NomStagiaire == nomUser && n.Classe == classe);
             
             if (stagiaire != null)
             {
@@ -80,16 +72,15 @@ namespace RTQuizz.Controllers
                 stagiaire = new Stagiaire();
                 stagiaire.NomStagiaire = nomUser;
                 stagiaire.Classe = classe;
-                _dbQuizz.Stagiaire.Add(stagiaire);
-                _dbQuizz.SaveChanges();
+                _dbRTContext.Stagiaire.Add(stagiaire);
+                _dbRTContext.SaveChanges();
 
                 // Creation du stagiaire et ajout au quizz
                 view = "~/Views/Quizz/AfficheQuestion.cshtml";
             }
-            if(!_dbQuizz.QuizzStagiaire.Any(qs => qs.Stagiaire == stagiaire && qs.Quizz == quizz)){
-                _dbQuizz.QuizzStagiaire.Add(new QuizzStagiaire(quizz, stagiaire));
+            if(!_dbRTContext.QuizzStagiaire.Any(qs => qs.Stagiaire == stagiaire && qs.Quizz == quizz)){
+                _dbRTContext.QuizzStagiaire.Add(new QuizzStagiaire(quizz, stagiaire));
             }
-            
             
             // Stagiaire
             ViewBag.Stagiaire = stagiaire;
@@ -99,10 +90,10 @@ namespace RTQuizz.Controllers
             var question = quizz.Questions.SingleOrDefault(q => q.NumQuestion == numQuestion);
             if(question == null)
             {
-                ViewBag.listQuizz = _dbQuizz.Quizz.ToList();
+                ViewBag.listQuizz = _dbRTContext.Quizz.ToList();
                 message = "Bravo ! Quizz terminé ! :)";
                 ViewBag.message = message;
-                return View("index");
+                return View("Index");
             }
             
             ViewBag.Question = question;
@@ -111,12 +102,12 @@ namespace RTQuizz.Controllers
             var reponses = question.ListReponses;
             if (reponses == null)
             {
-                ViewBag.listQuizz = _dbQuizz.Quizz.ToList();
+                ViewBag.listQuizz = _dbRTContext.Quizz.ToList();
                 return View("Index");
             }
             ViewBag.Reponses = reponses;
 
-            ViewBag.listQuizz = _dbQuizz.Quizz.ToList();
+            ViewBag.listQuizz = _dbRTContext.Quizz.ToList();
             return View(view);
         }
 

@@ -19,17 +19,17 @@ namespace RTQuizz.Hubs
         {
 
         }
-       
+
         #region "Fonction perso"
         // connection
-      public void ClearListReponse()
+        public void ClearListReponse()
         {
             ListeRepDetails.Clear();
-         }
-        public async Task EnvoieresultatQuestionClasse(string Classe,string Question)
+        }
+        public async Task EnvoieresultatQuestionClasse(string Classe, string Question)
         {
             List<ReponseClasse> ListeRepDetailsTemp = new List<ReponseClasse>();
-                               
+
             foreach (ReponseClasse RepTemp in ListeRepDetails)
             {
                 if (Question == RepTemp.Question && Classe == RepTemp.Classe)
@@ -40,19 +40,19 @@ namespace RTQuizz.Hubs
             if (ListeRepDetailsTemp.Count > 0)
             {
                 string StrTempRepDetails = JsonConvert.SerializeObject(ListeRepDetailsTemp); ;
-                 await Clients.All.SendAsync("ReceiveReponseDetails", StrTempRepDetails);
+                await Clients.All.SendAsync("ReceiveReponseDetails", StrTempRepDetails);
             }
-            
+
         }
         public string ClasseCourante { get; set; }
         public string QuestionCourante { get; set; }
         public async Task EnvoieResultat()
         {
-                       
-          await EnvoieresultatQuestionClasse(ClasseCourante, QuestionCourante);
+
+            await EnvoieresultatQuestionClasse(ClasseCourante, QuestionCourante);
 
         }
-        public void AjoutResultat (Repondre Rep)
+        public void AjoutResultat(Repondre Rep)
         {
 
             ReponseClasse RepClasseTemp = new ReponseClasse();
@@ -69,15 +69,15 @@ namespace RTQuizz.Hubs
 
             if (matche != null)
             {
-               
+
                 matche = RepClasseTemp;
             }
             else
             {
                 ListeRepDetails.Add(RepClasseTemp);
-            
+
             }
-           
+
 
         }
 
@@ -141,11 +141,11 @@ namespace RTQuizz.Hubs
             ListeDeConnection = new List<ConnectionInfo>();
         }
 
-        public ConnectionInfo ChercheUserParNom(string UtilisateurNom )
+        public ConnectionInfo ChercheUserParNom(string UtilisateurNom)
         {
             foreach (ConnectionInfo UtilisateurDansListe in ListeDeConnection)
             {
-               if (UtilisateurDansListe.User== UtilisateurNom)
+                if (UtilisateurDansListe.User == UtilisateurNom)
                 {
                     return UtilisateurDansListe;
                 }
@@ -166,7 +166,7 @@ namespace RTQuizz.Hubs
         public bool User(ConnectionInfo AjoutUser)
         {
             ConnectionInfo UserTemp = null;
-          if (AjoutUser.User != "")
+            if (AjoutUser.User != "")
             {
                 UserTemp = ChercheUserParNom(AjoutUser.User);
                 if (UserTemp != null)
@@ -195,7 +195,7 @@ namespace RTQuizz.Hubs
                 {
                     ListeDeConnection.Remove(UserTemp);
                     return true;
-                }               
+                }
             }
             return false;
         }
@@ -207,18 +207,18 @@ namespace RTQuizz.Hubs
     }
     public class ConnectionInfo
     {
-    public  string ConnectionId { get; set; }
-    public string User { get; set; }
-    public string classe { get; set; }
-    public string Quizz { get; set; }
-     public int QuestionNumero { get; set; }
+        public string ConnectionId { get; set; }
+        public string User { get; set; }
+        public string classe { get; set; }
+        public string Quizz { get; set; }
+        public int QuestionNumero { get; set; }
     }
     public class ReponseClasse
     {
-       public string  Question { get; set; }
+        public string Question { get; set; }
         public string Nom { get; set; }
         public string Classe { get; set; }
         public string Reponse { get; set; }
-    public bool Juste { get; set; }
+        public bool Juste { get; set; }
     }
 }
